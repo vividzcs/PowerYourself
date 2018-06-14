@@ -1,6 +1,7 @@
 package com.nwuer.core.controller;
 
 import com.nwuer.core.common.ResponseCode;
+import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.event.OnRegistrationCompleteEvent;
 import com.nwuer.core.common.util.ResultUtil;
 import com.nwuer.core.dto.UserDto;
@@ -42,8 +43,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
-    public String login(){
-        return null;
+    public ServerResponse<String> login(UserDto userDto){
+        return userService.login(userDto);
     }
 
     @RequestMapping("send")

@@ -1,6 +1,7 @@
 package com.nwuer.core.service;
 
 
+import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.dto.UserDto;
 import com.nwuer.core.pojo.User;
 import com.nwuer.core.pojo.VerificationToken;
@@ -31,7 +32,9 @@ public interface IUserService {
      * 登录的业务逻辑
      * @param userDto 登录的dto对象
      */
-    UserDto login(UserDto userDto);
+//    UserDto login(UserDto userDto);
+
+    ServerResponse<String> login(UserDto userDto);
 
     User getUser(String verificationToken);
 

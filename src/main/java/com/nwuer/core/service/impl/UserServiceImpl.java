@@ -1,6 +1,7 @@
 package com.nwuer.core.service.impl;
 
 import com.nwuer.core.common.ResponseCode;
+import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.exception.PowerYourselfException;
 import com.nwuer.core.dto.UserDto;
 import com.nwuer.core.pojo.Role;
@@ -9,8 +10,6 @@ import com.nwuer.core.pojo.VerificationToken;
 import com.nwuer.core.service.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 
 /**
  * @author harbo
@@ -57,7 +56,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDto login(UserDto userDto) {
+    public ServerResponse<String> login(UserDto userDto) {
         /*User user = userRepository.findTopByUsernameAndPassword(
                 userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()));
         if (user != null) {
@@ -66,7 +65,12 @@ public class UserServiceImpl implements IUserService {
             return null;
         }*/
         // TODO repository层还没写
-        return new UserDto("zxg", "123123123**8asfasf", "124@124.con");
+//        return new UserDto("zxg", "123123123**8asfasf", "124@124.con");
+        if("dzc".equals(userDto.getUsername())&&"123".equals(userDto.getPassword())){
+            return ServerResponse.createBySuccess("登录成功");
+        }else {
+            return ServerResponse.createByErrorMessage("用户名或密码错误");
+        }
     }
 
     @Override
