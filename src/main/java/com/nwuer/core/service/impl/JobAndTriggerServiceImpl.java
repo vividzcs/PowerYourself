@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.nwuer.core.dao.JobAndTriggerMapper;
 import com.nwuer.core.entity.JobAndTrigger;
 import com.nwuer.core.pojo.BaseJob;
-import com.nwuer.core.pojo.PowerYourselfJob;
 import com.nwuer.core.service.IJobAndTriggerService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -23,6 +22,9 @@ import java.util.List;
 public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
 
     private final JobAndTriggerMapper jobAndTriggerMapper;
+    /**
+     * Scheduler代表一个调度容器,一个调度容器可以注册多个JobDetail和Trigger.当Trigger和JobDetail组合,就可以被Scheduler容器调度了
+     */
     private final Scheduler scheduler;
 
     @Autowired
@@ -46,14 +48,19 @@ public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
      */
     public void addJob(BaseJob job) throws SchedulerException {
 
-        // 创建JobDetail实例,绑定Job实现类
+        /** 创建JobDetail实例,绑定Job实现类
+        * JobDetail 表示一个具体的可执行的调度程序,job是这个可执行调度程序所要执行的内容
+        * 另外JobDetail还包含了这个任务调度的方案和策略**/
         // 指明job的名称，所在组的名称，以及绑定job类
-        JobDetail jobDetail = JobBuilder.newJob(PowerYourselfJob.class)
+        JobDetail jobDetail = JobBuilder.newJob(job.getBeanClass())
                 .withIdentity(job.getJobKey())
                 .withDescription(job.getDescription())
                 .usingJobData(job.getDataMap())
                 .build();
 
+        /**
+         * Trigger代表一个调度参数的配置,什么时候去调度
+         */
         //定义调度触发规则, 使用cronTrigger规则
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity(job.getJobName(),job.getJobGroup())

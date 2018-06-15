@@ -45,7 +45,7 @@ public abstract class BaseJob implements Job,Serializable {
     /**
      * 任务执行时调用哪个类的方法 包名+类名
      */
-    private String beanClass;
+    private Class beanClass = this.getClass();
     /**
      * 任务是否有状态
      */
