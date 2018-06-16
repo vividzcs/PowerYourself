@@ -88,6 +88,13 @@
 			<version>0.9.4</version>
 		</dependency>
 
+		<!--guava缓存-->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+
 		<!--web程序监视器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

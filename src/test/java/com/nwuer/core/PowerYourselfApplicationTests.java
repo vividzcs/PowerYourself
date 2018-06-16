@@ -1,5 +1,6 @@
 package com.nwuer.core;
 
+import com.nwuer.core.common.util.DateParseForCronExpressionUtil;
 import com.nwuer.core.pojo.PowerYourselfJob;
 import com.nwuer.core.service.impl.JobAndTriggerServiceImpl;
 import org.junit.Test;
@@ -8,6 +9,8 @@ import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.text.ParseException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,6 +35,12 @@ public class PowerYourselfApplicationTests {
 //		jobAndTriggerService.resumeJob("测试","default");
 //		jobAndTriggerService.rescheduleJob("测试","default","0 27 0  * * ?");
 //		jobAndTriggerService.deleteJob("测试","default");
+	}
+
+	@Test
+	public void test() throws ParseException {
+		System.out.println(DateParseForCronExpressionUtil.parse("2019-04-22 22:12:33"));
+
 	}
 
 }
