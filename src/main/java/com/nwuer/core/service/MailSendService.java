@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 邮件发送
  * @author vividzc
  * @date 2018/6/13 17:19
  */
@@ -27,7 +28,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class MailSendService {
-    private static final String template = "mail.ftl";
+    private static final String template = "mail/mail.ftl"; //邮件发送的模板
 
     private final FreeMarkerConfigurer configurer;
     private final JavaMailSenderImpl javaMailSenderImpl;
@@ -56,10 +57,25 @@ public class MailSendService {
         }
     }
 
+    /**
+     * 由FreeMarker将模板渲染后返回,作为邮件内容
+     * @param template
+     * @param model
+     * @return
+     * @throws IOException
+     * @throws TemplateException
+     */
     private String getTextByTemplate(String template, Map<String, String> model) throws IOException, TemplateException {
         return FreeMarkerTemplateUtils.processTemplateIntoString(configurer.getConfiguration().getTemplate(template), model);
     }
 
+    /**
+     * 发送邮件
+     * @param to
+     * @param text
+     * @throws MessagingException
+     * @throws UnsupportedEncodingException
+     */
     private void send(String to, String text) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = javaMailSenderImpl.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");

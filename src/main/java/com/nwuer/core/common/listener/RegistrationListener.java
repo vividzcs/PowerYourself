@@ -12,16 +12,33 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+/**
+ * 注册完成的监听器
+ * @author zengxiaogang
+ */
+
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
+    /**
+     * userService服务类注入进来
+     */
     private final IUserService service;
 
+    /**
+     * mailSender注入
+     */
     private final JavaMailSender mailSender;
 
+    /**
+     * 发件人邮箱
+     */
     @Value("${spring.mail.username}")
     private String senderEmail;
 
-    @Value("${nwuer.mail.personal}")
+    /**
+     * app名字
+     */
+    @Value("${nwuer.app.brand}")
     private String brand;
 
     @Autowired
@@ -30,17 +47,31 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         this.mailSender = mailSender;
     }
 
+    /**
+     * 时间发生的时候，执行如下方法
+     * @param event the event to respond to
+     */
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
         confirmRegistration(event);
     }
 
+    /**
+     * 真正处理事件的方法
+     * @param event the event to respond to
+     */
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
+        //拿到user
         User user = event.getUser();
+        //随机生成token
         String token = UUID.randomUUID().toString();
+        //利用token，调用userService，生成验证码
         service.createVerificationToken(user, token);
 
+        //拿到用户的邮箱
         String recipientAddress = user.getEmail();
+
+        //构造邮件
         String subject = "是您注册了" + brand + "吗？请确认您的邮箱";
         String confirmationUrl
                 = event.getAppUrl() + "/registrationConfirm?token=" + token;
@@ -51,6 +82,8 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message + System.lineSeparator() + brand + confirmationUrl);
+
+        //发送邮件
         mailSender.send(email);
     }
 }
