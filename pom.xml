@@ -69,7 +69,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- mybatis pager -->
+		<!-- mappers pager -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
@@ -131,7 +131,15 @@
 				<configuration>
 					<verbose>true</verbose>
 					<overwrite>true</overwrite>
+					<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.45</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<plugin>
