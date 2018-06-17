@@ -58,32 +58,42 @@ public class UserController {
                              Errors errors,
                              WebRequest request) {
         User newAccount = null;
+        //验证注册表单信息
         StringBuilder errorMessage = new StringBuilder();
         if (!errors.hasErrors()) {
+            //注册表单没有错，创建新用户
             newAccount = userService.createNewAccount(new UserDto(
                     form.getUsername(),
                     form.getPassword(),
                     form.getEmail()
             ));
         } else {
+            //注册表单填写有错
             List<ObjectError> allErrors = errors.getAllErrors();
             for (ObjectError error : allErrors) {
                 errorMessage.append(error.getDefaultMessage()).append("|");
             }
             errorMessage.delete(errorMessage.lastIndexOf("|"), errorMessage.capacity());
         }
+
+        //注册失败
         if (newAccount == null) {
+            //返回错误原因及代码
             return ResultUtil.error(ResponseCode.REGISTRATION_FORM_FILL_IN_INCORRECT.getCode(),
                     ResponseCode.REGISTRATION_FORM_FILL_IN_INCORRECT.getDesc() + errorMessage.toString());
         }
+        //注册成功
 
         try {
+            //发布事件，发送激活邮件
             String appUrl = request.getContextPath();
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent(newAccount, appUrl));
         } catch (Exception me) {
+            //出现异常返回错误信息
             return ResultUtil.error(ResponseCode.EMAIL_SEND_ERROR);
         }
 
+        //发送邮件的事件发布成功，返回注册成功的提戳
         return ResultUtil.success(new UserDto(
                 newAccount.getUsername(),
                 "******",

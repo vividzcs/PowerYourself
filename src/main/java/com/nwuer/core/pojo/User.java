@@ -18,14 +18,11 @@ public class User {
     private String id;
 
     private String username;
+    private String nickname;
     private String password;
 
     private String email;
 
     private Role role;
-
-    private boolean enabled = false;
-
-    private boolean locked = false;
 
 }

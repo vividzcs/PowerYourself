@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * @author harbo
  * @date 6.13 23:40
- * @see java.lang.annotation.Annotation and
+ * @see java.lang.annotation.Annotation
  * 注解，验证两次输入密码是否一致
  */
 

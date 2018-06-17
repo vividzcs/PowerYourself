@@ -11,23 +11,13 @@ import java.text.ParseException;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 
+/**
+ * 自定义异常处理类
+ * @author zengxiaogang
+ */
 @RestControllerAdvice
 @Log
 public class PowerYourselfExceptionHandler {
-
-//    @ExceptionHandler(Exception.class)
-//    public ResultVo handle(Exception e) {
-//        if (e instanceof PowerYourselfException) {
-//            PowerYourselfException powerYourselfException = (PowerYourselfException) e;
-//            return ResultUtil.error(powerYourselfException.getCode(), powerYourselfException.getMessage());
-//        } else if (e.getCause() instanceof PowerYourselfException) {
-//            PowerYourselfException powerYourselfException = (PowerYourselfException) e.getCause();
-//            return ResultUtil.error(powerYourselfException.getCode(), powerYourselfException.getMessage());
-//        } else {
-//            log.log(Level.SEVERE, "【系统异常】", e);
-//            return ResultUtil.error(ResponseCode.UNKNOWN_ERROR);
-//        }
-//    }
 
     @ExceptionHandler(Exception.class)
     public ServerResponse<String> handle(Exception e){
