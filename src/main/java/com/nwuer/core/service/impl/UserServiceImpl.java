@@ -19,7 +19,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findTopUserByUsername(UserDto user) {
-        return new User("asfaas", "zxg", "123124asd", "757772438@qq.com", Role.roleOrdinaryUser, true, false);
+        return null;
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
@@ -36,12 +36,12 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = new User();
-        user.setRole(new Role(Role.roleOrdinaryUser.getId(), Role.roleOrdinaryUser.getName()));
+        user.setRole(new Role(Role.roleOrdinaryUser.getId(), Role.roleOrdinaryUser.getLevel()));
         user.setUsername(userDto.getUsername());
 //        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
 //        return userRepository.save(user);
-        return new User("asfaas", "zxg", "123124asd", "harbourzeng@gmail.com", Role.roleOrdinaryUser, true, false);
+        return null;
     }
 
     @Override
