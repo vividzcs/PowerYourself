@@ -325,4 +325,490 @@
       activated = #{activated,jdbcType=BIT}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <resultMap id="BaseResultMap" type="com.nwuer.core.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone_number" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_login_datetime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="activated" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, nickname, password, email, phone_number, last_login_datetime, last_login_ip, 
+    avatar, role_id, activated
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nwuer.core.entity.User">
+    insert into user (id, username, nickname, 
+      password, email, phone_number, 
+      last_login_datetime, last_login_ip, avatar, 
+      role_id, activated)
+    values (#{id,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{lastLoginDatetime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=CHAR}, #{activated,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nwuer.core.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="activated != null">
+        activated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        #{activated,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nwuer.core.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        activated = #{activated,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nwuer.core.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=CHAR},
+      activated = #{activated,jdbcType=BIT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.nwuer.core.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone_number" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_login_datetime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="activated" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, nickname, password, email, phone_number, last_login_datetime, last_login_ip, 
+    avatar, role_id, activated
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nwuer.core.entity.User">
+    insert into user (id, username, nickname, 
+      password, email, phone_number, 
+      last_login_datetime, last_login_ip, avatar, 
+      role_id, activated)
+    values (#{id,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{lastLoginDatetime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=CHAR}, #{activated,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nwuer.core.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="activated != null">
+        activated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        #{activated,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nwuer.core.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        activated = #{activated,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nwuer.core.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=CHAR},
+      activated = #{activated,jdbcType=BIT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.nwuer.core.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone_number" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_login_datetime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="last_login_ip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="avatar" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="activated" javaType="java.lang.Boolean" jdbcType="BIT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, nickname, password, email, phone_number, last_login_datetime, last_login_ip, 
+    avatar, role_id, activated
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nwuer.core.entity.User">
+    insert into user (id, username, nickname, 
+      password, email, phone_number, 
+      last_login_datetime, last_login_ip, avatar, 
+      role_id, activated)
+    values (#{id,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{lastLoginDatetime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=CHAR}, #{activated,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nwuer.core.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="activated != null">
+        activated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        #{activated,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nwuer.core.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginDatetime != null">
+        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=CHAR},
+      </if>
+      <if test="activated != null">
+        activated = #{activated,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nwuer.core.entity.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=CHAR},
+      activated = #{activated,jdbcType=BIT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
 </mapper>

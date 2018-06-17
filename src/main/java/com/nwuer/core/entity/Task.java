@@ -2,7 +2,7 @@ package com.nwuer.core.entity;
 
 import java.util.Date;
 
-public class task {
+public class Task {
     private String id;
 
     private String title;
@@ -27,7 +27,7 @@ public class task {
 
     private String taskCategoryId;
 
-    public task(String id, String title, Date begainTime, Date endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId) {
+    public Task(String id, String title, Date begainTime, Date endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId) {
         this.id = id;
         this.title = title;
         this.begainTime = begainTime;
@@ -42,7 +42,7 @@ public class task {
         this.taskCategoryId = taskCategoryId;
     }
 
-    public task() {
+    public Task() {
         super();
     }
 
