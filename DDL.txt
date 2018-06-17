@@ -1,51 +1,51 @@
 create table repeat_polocy
 (
-	id char(36) not null comment 'ÈÎÎñÖØ¸´²ßÂÔUUID'
+	id char(36) not null comment 'ä»»åŠ¡é‡å¤ç­–ç•¥UUID'
 		primary key,
-	one_time_task bit not null comment 'ÊÇ·ñÒ»´ÎĞÔÈÎÎñ',
-	every int null comment 'Ã¿nÌì/ÖÜ/ÔÂ/ÄêÖØ¸´Ò»´Î',
+	one_time_task bit not null comment 'æ˜¯å¦ä¸€æ¬¡æ€§ä»»åŠ¡',
+	every int null comment 'æ¯nå¤©/å‘¨/æœˆ/å¹´é‡å¤ä¸€æ¬¡',
 	frequence int default '0' null comment '0 for the ''day'', 5 for the ''week'', 10 for the ''month'',15 for the ''year'''
 )
-comment 'ÈÎÎñÖØ¸´²ßÂÔ£ºÒ»´ÎĞÔ»î¶¯£¬Ã¿nÌì£¬Ã¿nÖÜÄ³Ìì£¬Ã¿nÔÂÄ³Ìì£¬Ã¿nÄêÄ³Ìì£¬nÎª´óÓÚµÈÓÚ0µÄÕûÊı'
+comment 'ä»»åŠ¡é‡å¤ç­–ç•¥ï¼šä¸€æ¬¡æ€§æ´»åŠ¨ï¼Œæ¯nå¤©ï¼Œæ¯nå‘¨æŸå¤©ï¼Œæ¯næœˆæŸå¤©ï¼Œæ¯nå¹´æŸå¤©ï¼Œnä¸ºå¤§äºç­‰äº0çš„æ•´æ•°'
 ;
 
 create table repetition_end_condition
 (
-	id char(36) not null comment 'ÖØ¸´½áÊøÌõ¼şUUID'
+	id char(36) not null comment 'é‡å¤ç»“æŸæ¡ä»¶UUID'
 		primary key,
-	polocy int default '1' null comment '1 for the ''never''£¨ÓÀ²»£©
-2 for the ''time''£¨Ê±¼ä£©
-3 for the ''frequency''£¨´ÎÊı£©',
-	never bit default b'0' null comment 'ÓÀ²»½áÊø',
-	time datetime null comment 'µ½ÌØ¶¨Ê±¼ä½áÊø',
-	frequency int null comment '´ïµ½ÌØ¶¨´ÎÊı½áÊø'
+	polocy int default '1' null comment '1 for the ''never''ï¼ˆæ°¸ä¸ï¼‰
+2 for the ''time''ï¼ˆæ—¶é—´ï¼‰
+3 for the ''frequency''ï¼ˆæ¬¡æ•°ï¼‰',
+	never bit default b'0' null comment 'æ°¸ä¸ç»“æŸ',
+	time datetime null comment 'åˆ°ç‰¹å®šæ—¶é—´ç»“æŸ',
+	frequency int null comment 'è¾¾åˆ°ç‰¹å®šæ¬¡æ•°ç»“æŸ'
 )
-comment 'ÖØ¸´½áÊøÌõ¼ş±í'
+comment 'é‡å¤ç»“æŸæ¡ä»¶è¡¨'
 ;
 
 create table role
 (
-	id varchar(36) not null comment 'ÓÃ»§½ÇÉ«uuid'
+	id varchar(36) not null comment 'ç”¨æˆ·è§’è‰²uuid'
 		primary key,
 	level int default '10' not null comment '0 for the admin/root users
 10 for the ordinary users'
 )
-comment 'ÓÃ»§½ÇÉ«'
+comment 'ç”¨æˆ·è§’è‰²'
 ;
 
 create table user
 (
-	id char(36) default '' not null comment 'ÓÃ»§Î¨Ò»±êÊ¶·û'
+	id char(36) default '' not null comment 'ç”¨æˆ·å”¯ä¸€æ ‡è¯†ç¬¦'
 		primary key,
-	username varchar(30) not null comment 'ÓÃ»§Ãû-Î¨Ò»',
-	nickname varchar(30) null comment 'ÓÃ»§êÇ³Æ',
-	password char(32) not null comment 'µÇÂ¼ÃÜÂë£¨¿ÚÁî£©',
-	email varchar(200) not null comment 'ÓÊÏä',
-	phone_number varchar(100) null comment 'ÊÖ»úºÅ',
-	last_login_datetime datetime null comment 'ÉÏ´ÎµÇÂ¼µÄÊ±¼ä',
-	last_login_ip varchar(255) null comment 'ÉÏ´ÎµÇÂ¼µÄip',
-	avatar varchar(2000) null comment 'Í·Ïñ±£´æµÄµØÖ·',
-	role_id char(36) default 'Unassigned' not null comment '½ÇÉ«',
+	username varchar(30) not null comment 'ç”¨æˆ·å-å”¯ä¸€',
+	nickname varchar(30) null comment 'ç”¨æˆ·æ˜µç§°',
+	password char(32) not null comment 'ç™»å½•å¯†ç ï¼ˆå£ä»¤ï¼‰',
+	email varchar(200) not null comment 'é‚®ç®±',
+	phone_number varchar(100) null comment 'æ‰‹æœºå·',
+	last_login_datetime datetime null comment 'ä¸Šæ¬¡ç™»å½•çš„æ—¶é—´',
+	last_login_ip varchar(255) null comment 'ä¸Šæ¬¡ç™»å½•çš„ip',
+	avatar varchar(2000) null comment 'å¤´åƒä¿å­˜çš„åœ°å€',
+	role_id char(36) default 'Unassigned' not null comment 'è§’è‰²',
 	constraint user_username_uindex
 		unique (username),
 	constraint user_email_uindex
@@ -56,20 +56,20 @@ create table user
 		foreign key (role_id) references role (id)
 			on update cascade on delete cascade
 )
-comment 'ÓÃ»§»ù±¾ĞÅÏ¢±í'
+comment 'ç”¨æˆ·åŸºæœ¬ä¿¡æ¯è¡¨'
 ;
 
 create table category
 (
-	id char(36) not null comment 'ÈÎÎñ·ÖÀà±íµÄUUID'
+	id char(36) not null comment 'ä»»åŠ¡åˆ†ç±»è¡¨çš„UUID'
 		primary key,
-	category_name varchar(255) not null comment '·ÖÀàµÄÃû×Ö',
-	user_id char(36) not null comment 'ÓÃ»§UUID',
+	category_name varchar(255) not null comment 'åˆ†ç±»çš„åå­—',
+	user_id char(36) not null comment 'ç”¨æˆ·UUID',
 	constraint category_user_id_fk
 		foreign key (user_id) references user (id)
 			on update cascade on delete cascade
 )
-comment '·ÖÀà±í'
+comment 'åˆ†ç±»è¡¨'
 ;
 
 create index category_user_id_fk
@@ -78,19 +78,19 @@ create index category_user_id_fk
 
 create table task
 (
-	id char(36) not null comment 'ÈÎÎñµÄUUID'
+	id char(36) not null comment 'ä»»åŠ¡çš„UUID'
 		primary key,
-	title varchar(255) not null comment 'ÈÎÎñÃû³Æ/±êÌâ',
-	begain_time datetime null comment 'ÈÎÎñ¿ªÊ¼Ê±¼ä',
-	end_time datetime null comment 'ÈÎÎñ½áÊøÊ±¼ä',
-	all_day_task bit default b'0' not null comment 'boolÖµ£¬ÊÇ·ñÊÇÈ«ÌìÈÎÎñ',
-	task_modified bit default b'0' not null comment 'ÈÎÎñÊÇ·ñĞŞ¸Ä¹ı',
-	remind_time varchar(255) null comment 'ÌáĞÑÊ±¼ä£º´æÒ»´®¶ººÅ·Ö¸ôµÄ×Ö·û´®£¬±ÈÈç0,1,5,10ÒâË¼¾ÍÊÇ»î¶¯¿ªÊ¼Ç°µÄ0·ÖÖÓ£¬1·ÖÖÓ£¬Îå·ÖÖÓ£¬10·ÖÖÓ£¬·Ö±ğÌáĞÑ¡£Îª¿Õ¾Í²»ÌáĞÑ',
-	repeat_polocy_id char(36) not null comment 'ÖØ¸´²ßÂÔµÄUUID',
-	repetition_end_condition_id char(36) not null comment '½áÊøÖØ¸´µÄÌõ¼şÍâ¼üUUID',
-	location varchar(2000) null comment '»î¶¯µØµã',
-	notation varchar(5000) null comment '±¸×¢',
-	task_category_id char(36) not null comment 'ÈÎÎñ·ÖÀàUUID',
+	title varchar(255) not null comment 'ä»»åŠ¡åç§°/æ ‡é¢˜',
+	begain_time datetime null comment 'ä»»åŠ¡å¼€å§‹æ—¶é—´',
+	end_time datetime null comment 'ä»»åŠ¡ç»“æŸæ—¶é—´',
+	all_day_task bit default b'0' not null comment 'boolå€¼ï¼Œæ˜¯å¦æ˜¯å…¨å¤©ä»»åŠ¡',
+	task_modified bit default b'0' not null comment 'ä»»åŠ¡æ˜¯å¦ä¿®æ”¹è¿‡',
+	remind_time varchar(255) null comment 'æé†’æ—¶é—´ï¼šå­˜ä¸€ä¸²é€—å·åˆ†éš”çš„å­—ç¬¦ä¸²ï¼Œæ¯”å¦‚0,1,5,10æ„æ€å°±æ˜¯æ´»åŠ¨å¼€å§‹å‰çš„0åˆ†é’Ÿï¼Œ1åˆ†é’Ÿï¼Œäº”åˆ†é’Ÿï¼Œ10åˆ†é’Ÿï¼Œåˆ†åˆ«æé†’ã€‚ä¸ºç©ºå°±ä¸æé†’',
+	repeat_polocy_id char(36) not null comment 'é‡å¤ç­–ç•¥çš„UUID',
+	repetition_end_condition_id char(36) not null comment 'ç»“æŸé‡å¤çš„æ¡ä»¶å¤–é”®UUID',
+	location varchar(2000) null comment 'æ´»åŠ¨åœ°ç‚¹',
+	notation varchar(5000) null comment 'å¤‡æ³¨',
+	task_category_id char(36) not null comment 'ä»»åŠ¡åˆ†ç±»UUID',
 	constraint task_repeat_polocy_id_fk
 		foreign key (repeat_polocy_id) references repeat_polocy (id)
 			on update cascade on delete cascade,
@@ -101,7 +101,7 @@ create table task
 		foreign key (task_category_id) references category (id)
 			on update cascade on delete cascade
 )
-comment 'ÈÎÎñ±í'
+comment 'ä»»åŠ¡è¡¨'
 ;
 
 create index task_category_id_fk
