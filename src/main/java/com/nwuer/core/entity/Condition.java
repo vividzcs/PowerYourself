@@ -1,6 +1,6 @@
 package com.nwuer.core.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Condition {
     private String id;
@@ -9,11 +9,11 @@ public class Condition {
 
     private Boolean never;
 
-    private Date time;
+    private LocalDateTime time;
 
     private Integer frequency;
 
-    public Condition(String id, Integer policy, Boolean never, Date time, Integer frequency) {
+    public Condition(String id, Integer policy, Boolean never, LocalDateTime time, Integer frequency) {
         this.id = id;
         this.policy = policy;
         this.never = never;
@@ -49,11 +49,11 @@ public class Condition {
         this.never = never;
     }
 
-    public Date getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 

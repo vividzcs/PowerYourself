@@ -1,15 +1,15 @@
 package com.nwuer.core.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Task {
     private String id;
 
     private String title;
 
-    private Date begainTime;
+    private LocalDateTime beganTime;
 
-    private Date endTime;
+    private LocalDateTime endTime;
 
     private Boolean allDayTask;
 
@@ -27,10 +27,10 @@ public class Task {
 
     private String taskCategoryId;
 
-    public Task(String id, String title, Date begainTime, Date endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId) {
+    public Task(String id, String title, LocalDateTime beganTime, LocalDateTime endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId) {
         this.id = id;
         this.title = title;
-        this.begainTime = begainTime;
+        this.beganTime = beganTime;
         this.endTime = endTime;
         this.allDayTask = allDayTask;
         this.taskModified = taskModified;
@@ -62,19 +62,19 @@ public class Task {
         this.title = title == null ? null : title.trim();
     }
 
-    public Date getBegainTime() {
-        return begainTime;
+    public LocalDateTime getBeganTime() {
+        return beganTime;
     }
 
-    public void setBegainTime(Date begainTime) {
-        this.begainTime = begainTime;
+    public void setBeganTime(LocalDateTime beganTime) {
+        this.beganTime = beganTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

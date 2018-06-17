@@ -1,6 +1,6 @@
 package com.nwuer.core.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class User {
     private String id;
@@ -15,7 +15,7 @@ public class User {
 
     private String phoneNumber;
 
-    private Date lastLoginDatetime;
+    private LocalDateTime lastLoginDatetime;
 
     private String lastLoginIp;
 
@@ -25,7 +25,7 @@ public class User {
 
     private Boolean activated;
 
-    public User(String id, String username, String nickname, String password, String email, String phoneNumber, Date lastLoginDatetime, String lastLoginIp, String avatar, String roleId, Boolean activated) {
+    public User(String id, String username, String nickname, String password, String email, String phoneNumber, LocalDateTime lastLoginDatetime, String lastLoginIp, String avatar, String roleId, Boolean activated) {
         this.id = id;
         this.username = username;
         this.nickname = nickname;
@@ -91,11 +91,11 @@ public class User {
         this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
-    public Date getLastLoginDatetime() {
+    public LocalDateTime getLastLoginDatetime() {
         return lastLoginDatetime;
     }
 
-    public void setLastLoginDatetime(Date lastLoginDatetime) {
+    public void setLastLoginDatetime(LocalDateTime lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
 
