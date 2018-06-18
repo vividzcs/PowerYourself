@@ -26,10 +26,21 @@ public class TokenCache {
                 }
             });
 
+    /**
+     * 将String存到Cache中
+     * @param key
+     * @param value
+     */
     public static void setKey(String key,String value){
         localCache.put(key,value);
     }
 
+    /**
+     * 从缓存中拿value
+     * @param key
+     * @return
+     * @throws ExecutionException
+     */
     public static String getKey(String key) throws ExecutionException {
         String value = localCache.get(key);
         return "null".equals(value) ? null : value;
