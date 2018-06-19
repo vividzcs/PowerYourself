@@ -1,7 +1,9 @@
 package com.nwuer.core.dao;
 
 import com.nwuer.core.entity.Role;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface RoleMapper {
     int deleteByPrimaryKey(String id);
 

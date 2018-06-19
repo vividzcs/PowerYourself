@@ -1,7 +1,9 @@
 package com.nwuer.core.dao;
 
 import com.nwuer.core.entity.Condition;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ConditionMapper {
     int deleteByPrimaryKey(String id);
 
