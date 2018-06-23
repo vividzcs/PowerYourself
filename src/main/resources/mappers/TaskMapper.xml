@@ -27,7 +27,11 @@
     from task
     where id = #{id,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="selectAll" resultType="com.nwuer.core.entity.Task">
+      SELECT * from task
+      where user_id=#{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from task
     where id = #{id,jdbcType=CHAR}
   </delete>

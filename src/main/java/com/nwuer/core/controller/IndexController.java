@@ -6,9 +6,10 @@ import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.event.OnRegistrationCompleteEvent;
 import com.nwuer.core.common.util.ResultUtil;
 import com.nwuer.core.dto.UserDto;
-import com.nwuer.core.pojo.User;
+import com.nwuer.core.entity.User;
 import com.nwuer.core.service.IUserService;
 import com.nwuer.core.service.MailSendService;
+import com.nwuer.core.service.impl.CategoryService;
 import com.nwuer.core.vo.RegistrationFormVo;
 import com.nwuer.core.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -37,12 +39,38 @@ public class IndexController {
     private final IUserService userService;
 
     private final ApplicationEventPublisher eventPublisher;
-
+    private final CategoryService categoryService;
     @Autowired
-    public IndexController(ApplicationEventPublisher eventPublisher, MailSendService mailSendService, IUserService userService) {
+    public IndexController(ApplicationEventPublisher eventPublisher,
+                           MailSendService mailSendService, IUserService userService,
+                           CategoryService categoryService) {
         this.eventPublisher = eventPublisher;
         this.mailSendService = mailSendService;
         this.userService = userService;
+        this.categoryService = categoryService;
+    }
+
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public  ModelAndView index(HttpSession session){
+        UserDto user = (UserDto) session.getAttribute(Const.CURRENT_USER);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("/index");
+        if(user != null){
+
+
+            List<Object[]> listOrdered = categoryService.getCategoryOrdered(user.getId(),"0");
+            for(int i=0; i<listOrdered.size();i++) {
+                StringBuilder str = new StringBuilder();
+                for(int j=0;j<(Integer)listOrdered.get(i)[1];j++) {
+                    str.append("&nbsp;&nbsp;");
+                }
+                listOrdered.get(i)[1] = str;
+            }
+
+            mv.addObject("allCategoryOrdered",listOrdered);
+        }
+
+        return mv;
     }
 
     @RequestMapping(value = "/to_login",method = RequestMethod.GET)
@@ -61,7 +89,7 @@ public class IndexController {
         ServerResponse res = userService.login(userDto);
         if(res.isSuccess()) {
             userDto.setPassword(null);
-            session.setAttribute(Const.CURRENT_USER,userDto);
+            session.setAttribute(Const.CURRENT_USER,res.getData());
         }
 
         return res;
@@ -83,7 +111,7 @@ public class IndexController {
         StringBuilder errorMessage = new StringBuilder();
         if (!errors.hasErrors()) {
             //注册表单没有错，创建新用户
-            newAccount = userService.createNewAccount(new UserDto(
+            newAccount = userService.createNewAccount(new UserDto(null,
                     form.getUsername(),
                     form.getPassword(),
                     form.getEmail()
@@ -115,15 +143,19 @@ public class IndexController {
         }
 
         //发送邮件的事件发布成功，返回注册成功的提戳
-        return ResultUtil.success(new UserDto(
+        return ResultUtil.success(new UserDto(null,
                 newAccount.getUsername(),
                 "******",
                 newAccount.getEmail()));
     }
 
     @RequestMapping("test")
-    public String test(){
-        return "admin/index";
+    public ModelAndView test(){
+        ServerResponse res = ServerResponse.createBySuccess();
+        ModelAndView mv = new ModelAndView();
+        mv.addObject(res);
+        mv.setViewName("index");
+        return mv;
     }
 
 }

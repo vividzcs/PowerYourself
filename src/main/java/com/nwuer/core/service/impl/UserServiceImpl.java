@@ -3,10 +3,11 @@ package com.nwuer.core.service.impl;
 import com.nwuer.core.common.ResponseCode;
 import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.exception.PowerYourselfException;
+import com.nwuer.core.common.util.MD5;
 import com.nwuer.core.dao.UserMapper;
 import com.nwuer.core.dto.UserDto;
+import com.nwuer.core.entity.User;
 import com.nwuer.core.pojo.Role;
-import com.nwuer.core.pojo.User;
 import com.nwuer.core.pojo.VerificationToken;
 import com.nwuer.core.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = new User();
-        user.setRole(Role.ORDINARY);
+        user.setRole(Role.ORDINARY.getLevel());
         user.setUsername(userDto.getUsername());
 //        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
@@ -61,21 +62,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse<String> login(UserDto userDto) {
-        /*User user = userRepository.findTopByUsernameAndPassword(
-                userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()));
+    public ServerResponse login(UserDto userDto) {
+        User user = userMapper.findByUsernameAndPassword(userDto.getUsername(), MD5.md5(userDto.getPassword()));
         if (user != null) {
-            return new UserDto(user.getUsername(), "******", user.getEmail());
+            return ServerResponse.createBySuccess(new UserDto(user.getId(),user.getUsername(), "******", user.getEmail()));
         } else {
-            return null;
-        }*/
-        // TODO repository层还没写
-//        User u = userMapper
-        if("dzc".equals(userDto.getUsername())&&"123".equals(userDto.getPassword())){
-            return ServerResponse.createBySuccess("登录成功");
-        }else {
             return ServerResponse.createByErrorMessage("用户名或密码错误");
         }
+        // TODO repository层还没写
+
     }
 
     @Override

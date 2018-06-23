@@ -1,12 +1,14 @@
 package com.nwuer.core.entity;
 
-import com.nwuer.core.common.util.UuidUtil;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class User {
-    private String id = UuidUtil.get32UUID();
+    private String id;
 
+    @NotNull(message = "用户名不能为空")
+    @Size(min = 5, max = 16, message = "用户名最小不能小于5位，最大不能超过16位")
     private String username;
 
     private String nickname;
@@ -25,7 +27,7 @@ public class User {
 
     private String role;
 
-    private Boolean activated = Boolean.FALSE;
+    private Boolean activated;
 
     public User(String id, String username, String nickname, String password, String email, String phoneNumber, LocalDateTime lastLoginDatetime, String lastLoginIp, String avatar, String role, Boolean activated) {
         this.id = id;

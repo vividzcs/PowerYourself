@@ -1,7 +1,7 @@
 package com.nwuer.core.common.listener;
 
 import com.nwuer.core.common.event.OnRegistrationCompleteEvent;
-import com.nwuer.core.pojo.User;
+import com.nwuer.core.entity.User;
 import com.nwuer.core.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

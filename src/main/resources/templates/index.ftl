@@ -25,34 +25,47 @@
         <!--小屏幕导航按钮和logo-->
         <!--导航-->
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a></li>
+            <ul class="nav navbar-nav big-nav">
+                <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a></li>
                 <li class="dropdown">
                     <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         分类
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        <li><a href="index.html"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;&nbsp;生日提醒</a></li>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;重要任务</a></li>
+                        <#if Session.currentUser?exists>
+                            <#if allCategoryOrdered?exists>
+                                <#list allCategoryOrdered as ordered>
+                                    <li><a href="/user/category/find/${ordered[0].id}"><span class="glyphicon glyphicon-th-list"></span>${ordered[1]}${ordered[0].categoryName}</a></li>
+                                </#list>
+
+                            </#if>
+                        <#else>
+                            <li>&nbsp;&nbsp;请登录</li>
+                        </#if>
+
 
                     </ul>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <#--<li class="dropdown">
-                    <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        vividzc
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        <li><a href="index.html"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;&nbsp;前台首页</a></li>
-                        <li><a href="index.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个人设置</a></li>
-
-                    </ul>
-                </li>-->
-                <li><a href="/to_login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;登录</a></li>
+                <#if Session.currentUser?exists>
+                    <li><a href="javascript:void(0)"></a></li>
+                    <li class="dropdown">
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            你好,${Session.currentUser.username}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="/user/"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;&nbsp;后台首页</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a></li>
+                    <#else>
+                    <li><a href="/to_login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;登录</a></li>
                 <li><a href="/to_register"><span class="glyphicon glyphicon-registration-mark"></span>&nbsp;&nbsp;注册</a></li>
+                </#if>
+
             </ul>
         </div>
         <!--导航-->
@@ -90,8 +103,6 @@
     </div>
 </div>
 
-
-
 <!--footer-->
 <footer>
     <div class="container">
@@ -117,6 +128,11 @@
             delay:
                     { show: 100, hide: 500 }
         })
+    });
+
+    $('.big-nav li').click(function(event) {
+
+        $(this).tab('show');
     });
 </script>
 </body>

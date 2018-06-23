@@ -15,3 +15,10 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+
+<script>
+    $('.big-nav li').click(function(event) {
+
+        $(this).tab('show');
+    });
+</script>

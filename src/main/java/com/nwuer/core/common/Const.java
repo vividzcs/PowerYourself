@@ -6,4 +6,5 @@ package com.nwuer.core.common;
  */
 public interface Const {
     public static final String CURRENT_USER = "currentUser";
+    public static final Integer ID_LENGTH = 32;
 }

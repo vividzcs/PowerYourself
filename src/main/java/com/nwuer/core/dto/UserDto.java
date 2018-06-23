@@ -13,6 +13,8 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
+
+    private String id;
     /**
      * 用户名
      */

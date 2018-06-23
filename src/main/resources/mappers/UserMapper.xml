@@ -26,7 +26,13 @@
     from user
     where id = #{id,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <select id="findByUsernameAndPassword" resultType="com.nwuer.core.entity.User">
+      SELECT * from user
+      where username=#{username}
+      and password=#{password}
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
     where id = #{id,jdbcType=CHAR}
   </delete>

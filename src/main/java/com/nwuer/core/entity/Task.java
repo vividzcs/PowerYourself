@@ -27,7 +27,11 @@ public class Task {
 
     private String taskCategoryId;
 
-    public Task(String id, String title, LocalDateTime beganTime, LocalDateTime endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId) {
+    private String userId;
+
+
+
+    public Task(String id, String title, LocalDateTime beganTime, LocalDateTime endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId,String userId) {
         this.id = id;
         this.title = title;
         this.beganTime = beganTime;
@@ -40,12 +44,21 @@ public class Task {
         this.location = location;
         this.notation = notation;
         this.taskCategoryId = taskCategoryId;
+        this.userId = userId;
     }
 
     public Task() {
         super();
     }
 
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
     public String getId() {
         return id;
     }

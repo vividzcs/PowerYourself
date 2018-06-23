@@ -54,11 +54,16 @@ public class PowerYourselfApplicationTests {
 //		System.out.println(MD5.md5("1234"));
 		User user = new User();
 		user.setId(UuidUtil.get32UUID());
-		user.setUsername("deng");
+		user.setUsername("dzc");
 		user.setEmail("1747789689@qq.com");
 		user.setPassword(MD5.md5("123"));
 		user.setRole(Role.ORDINARY.getLevel());
+		user.setActivated(Boolean.FALSE);
 		userMapper.insert(user);
+	}
+
+	public void addUser() {
+
 	}
 
 }

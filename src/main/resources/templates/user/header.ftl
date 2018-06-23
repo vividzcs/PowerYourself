@@ -24,9 +24,9 @@
         <!--小屏幕导航按钮和logo-->
         <!--导航-->
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/user/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
-                <li><a href="/user/column/list"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;分类管理</a></li>
+            <ul class="nav navbar-nav big-nav">
+                <li><a href="/user/"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
+                <li><a href="/user/category/"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;分类管理</a></li>
                 <li><a href="/user/job/list"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;任务管理</a></li>
                 <li><a href="/user/statistic/list"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;数据统计</a></li>
             </ul>

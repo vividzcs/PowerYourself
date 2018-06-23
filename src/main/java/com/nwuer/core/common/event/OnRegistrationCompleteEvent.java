@@ -1,7 +1,7 @@
 package com.nwuer.core.common.event;
 
 import com.nwuer.core.controller.IndexController;
-import com.nwuer.core.pojo.User;
+import com.nwuer.core.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
