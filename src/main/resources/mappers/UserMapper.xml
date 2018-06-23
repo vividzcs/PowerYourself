@@ -12,13 +12,13 @@
       <arg column="last_login_datetime" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
       <arg column="last_login_ip" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="avatar" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="role_id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="role" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="activated" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, nickname, password, email, phone_number, last_login_datetime, last_login_ip, 
-    avatar, role_id, activated
+    avatar, role, activated
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -34,11 +34,11 @@
     insert into user (id, username, nickname, 
       password, email, phone_number, 
       last_login_datetime, last_login_ip, avatar, 
-      role_id, activated)
+      role, activated)
     values (#{id,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{lastLoginDatetime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
-      #{roleId,jdbcType=CHAR}, #{activated,jdbcType=BIT})
+      #{role,jdbcType=CHAR}, #{activated,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.nwuer.core.entity.User" >
     insert into user
@@ -70,8 +70,8 @@
       <if test="avatar != null" >
         avatar,
       </if>
-      <if test="roleId != null" >
-        role_id,
+      <if test="role != null" >
+        role,
       </if>
       <if test="activated != null" >
         activated,
@@ -105,8 +105,8 @@
       <if test="avatar != null" >
         #{avatar,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=CHAR},
+      <if test="role != null" >
+        #{role,jdbcType=CHAR},
       </if>
       <if test="activated != null" >
         #{activated,jdbcType=BIT},
@@ -140,8 +140,8 @@
       <if test="avatar != null" >
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=CHAR},
+      <if test="role != null" >
+        role = #{role,jdbcType=CHAR},
       </if>
       <if test="activated != null" >
         activated = #{activated,jdbcType=BIT},
@@ -159,7 +159,7 @@
       last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=CHAR},
+      role = #{role,jdbcType=CHAR},
       activated = #{activated,jdbcType=BIT}
     where id = #{id,jdbcType=CHAR}
   </update>

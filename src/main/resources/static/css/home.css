@@ -1,0 +1,16 @@
+
+.banner {
+    text-align: center;
+}
+.progress{
+    height: 3rem;
+}
+
+.content {
+    line-height:3rem;
+    position: relative;
+    right: 82%;
+    z-index: 100;
+    display: block;
+    white-space:nowrap;text-overflow:ellipsis;
+}

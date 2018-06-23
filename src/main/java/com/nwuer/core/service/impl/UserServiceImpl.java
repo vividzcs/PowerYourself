@@ -3,11 +3,13 @@ package com.nwuer.core.service.impl;
 import com.nwuer.core.common.ResponseCode;
 import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.exception.PowerYourselfException;
+import com.nwuer.core.dao.UserMapper;
 import com.nwuer.core.dto.UserDto;
 import com.nwuer.core.pojo.Role;
 import com.nwuer.core.pojo.User;
 import com.nwuer.core.pojo.VerificationToken;
 import com.nwuer.core.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class UserServiceImpl implements IUserService {
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public User findTopUserByUsername(UserDto user) {
@@ -36,7 +41,7 @@ public class UserServiceImpl implements IUserService {
         }
 
         User user = new User();
-        user.setRole(new Role(Role.roleOrdinaryUser.getId(), Role.roleOrdinaryUser.getLevel()));
+        user.setRole(Role.ORDINARY);
         user.setUsername(userDto.getUsername());
 //        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
@@ -65,7 +70,7 @@ public class UserServiceImpl implements IUserService {
             return null;
         }*/
         // TODO repository层还没写
-//        return new UserDto("zxg", "123123123**8asfasf", "124@124.con");
+//        User u = userMapper
         if("dzc".equals(userDto.getUsername())&&"123".equals(userDto.getPassword())){
             return ServerResponse.createBySuccess("登录成功");
         }else {

@@ -1,9 +1,11 @@
 package com.nwuer.core.entity;
 
+import com.nwuer.core.common.util.UuidUtil;
+
 import java.time.LocalDateTime;
 
 public class User {
-    private String id;
+    private String id = UuidUtil.get32UUID();
 
     private String username;
 
@@ -21,11 +23,11 @@ public class User {
 
     private String avatar;
 
-    private String roleId;
+    private String role;
 
-    private Boolean activated;
+    private Boolean activated = Boolean.FALSE;
 
-    public User(String id, String username, String nickname, String password, String email, String phoneNumber, LocalDateTime lastLoginDatetime, String lastLoginIp, String avatar, String roleId, Boolean activated) {
+    public User(String id, String username, String nickname, String password, String email, String phoneNumber, LocalDateTime lastLoginDatetime, String lastLoginIp, String avatar, String role, Boolean activated) {
         this.id = id;
         this.username = username;
         this.nickname = nickname;
@@ -35,7 +37,7 @@ public class User {
         this.lastLoginDatetime = lastLoginDatetime;
         this.lastLoginIp = lastLoginIp;
         this.avatar = avatar;
-        this.roleId = roleId;
+        this.role = role;
         this.activated = activated;
     }
 
@@ -115,12 +117,12 @@ public class User {
         this.avatar = avatar == null ? null : avatar.trim();
     }
 
-    public String getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
     }
 
     public Boolean getActivated() {

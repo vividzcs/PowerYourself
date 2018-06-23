@@ -1,6 +1,6 @@
 package com.nwuer.core.common.event;
 
-import com.nwuer.core.controller.UserController;
+import com.nwuer.core.controller.IndexController;
 import com.nwuer.core.pojo.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationEvent;
 
 /**
  * 一个事件类
- * @see UserController#register(com.nwuer.core.vo.RegistrationFormVo, org.springframework.validation.Errors, org.springframework.web.context.request.WebRequest)
+ * @see IndexController#register(com.nwuer.core.vo.RegistrationFormVo, org.springframework.validation.Errors, org.springframework.web.context.request.WebRequest)
  * @author zengxiaogang
  */
 @Getter

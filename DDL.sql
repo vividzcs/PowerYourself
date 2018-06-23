@@ -27,7 +27,7 @@ create table role
 (
 	id varchar(36) not null comment '用户角色uuid'
 		primary key,
-	level int default '10' not null comment '0 for the admin/root users
+	level int default '10' not null comment '0 for the user/root users
 10 for the ordinary users'
 )
 comment '用户角色'

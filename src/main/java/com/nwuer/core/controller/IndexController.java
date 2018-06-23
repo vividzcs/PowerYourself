@@ -1,5 +1,6 @@
 package com.nwuer.core.controller;
 
+import com.nwuer.core.common.Const;
 import com.nwuer.core.common.ResponseCode;
 import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.event.OnRegistrationCompleteEvent;
@@ -12,14 +13,16 @@ import com.nwuer.core.vo.RegistrationFormVo;
 import com.nwuer.core.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,8 +30,8 @@ import java.util.List;
  * @author vividzc
  * @date 2018/6/13 16:52
  */
-@RestController
-public class UserController {
+@Controller
+public class IndexController {
 
     private final MailSendService mailSendService;
     private final IUserService userService;
@@ -36,15 +39,33 @@ public class UserController {
     private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
-    public UserController(ApplicationEventPublisher eventPublisher, MailSendService mailSendService, IUserService userService) {
+    public IndexController(ApplicationEventPublisher eventPublisher, MailSendService mailSendService, IUserService userService) {
         this.eventPublisher = eventPublisher;
         this.mailSendService = mailSendService;
         this.userService = userService;
     }
 
+    @RequestMapping(value = "/to_login",method = RequestMethod.GET)
+    public  String toLogin(){
+        return "login";
+    }
+
+    @RequestMapping(value = "to_register",method = RequestMethod.GET)
+    public String toRegister(){
+        return "register";
+    }
+
     @RequestMapping(value = "login",method = RequestMethod.POST)
-    public ServerResponse<String> login(UserDto userDto){
-        return userService.login(userDto);
+    @ResponseBody
+    public ServerResponse<String> login(UserDto userDto, HttpSession session){
+        ServerResponse res = userService.login(userDto);
+        if(res.isSuccess()) {
+            userDto.setPassword(null);
+            session.setAttribute(Const.CURRENT_USER,userDto);
+        }
+
+        return res;
+
     }
 
     @RequestMapping("send")
@@ -98,6 +119,11 @@ public class UserController {
                 newAccount.getUsername(),
                 "******",
                 newAccount.getEmail()));
+    }
+
+    @RequestMapping("test")
+    public String test(){
+        return "admin/index";
     }
 
 }
