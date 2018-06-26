@@ -17,7 +17,7 @@ public interface Const {
     public static final Integer JOB_FINISHED = 1;
     public static final Integer JOB_OVER_DATE = 2;
 
-    public static final String URL_PREFIX = "http://localhost:8080";
+    public static final String URL_PREFIX = "http://todo.nwuer.com";
 
     public static final String CATEGORY_ROOT_ID = "00000000000000000000000000000000";
 

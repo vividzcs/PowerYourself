@@ -52,7 +52,7 @@ public class SendSimpleEmailService {
         String subject = "您在" + brand + "重置密码,请继续操作!";
         String resetUrl
                 = url + "/reset?token=" + token;
-        String message = "<h2>点击链接,重置您的密码为:"+Const.INITAIL_PASSWORD+"</h2>";
+        String message = "<h2>点击链接,重置您的密码为:"+Const.INITAIL_PASSWORD+"</h2><br/><p>如果被阻拦可以复制链接到新窗口打开</p><br/>";
 
         /////////////////////////
         MimeMessage mimeMessage = mailSender.createMimeMessage();
