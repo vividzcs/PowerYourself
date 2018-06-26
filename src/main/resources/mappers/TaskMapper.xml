@@ -46,7 +46,11 @@
     delete from task
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.nwuer.core.entity.Task" >
+    <delete id="deleteByUserId">
+      delete from task
+      where user_id=#{id}
+    </delete>
+    <insert id="insert" parameterType="com.nwuer.core.entity.Task" >
     insert into task (id, title, began_time, 
       end_time, remind_time, location, 
       user_id, is_finished, task_category_id, 

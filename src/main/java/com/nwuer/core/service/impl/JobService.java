@@ -92,4 +92,9 @@ public class JobService implements IJobService {
     public void updateByPrimaryKeySelective(Task task){
         taskMapper.updateByPrimaryKeySelective(task);
     }
+
+    @Transactional
+    public void deleteByUserId(String id) {
+        taskMapper.deleteByUserId(id);
+    }
 }

@@ -6,6 +6,8 @@ import com.nwuer.core.common.Const;
 import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.common.util.MD5;
 import com.nwuer.core.dto.UserDto;
+import com.nwuer.core.service.impl.CategoryService;
+import com.nwuer.core.service.impl.JobService;
 import com.nwuer.core.service.impl.UserServiceImpl;
 import com.nwuer.core.vo.RegistrationFormVo;
 import com.nwuer.core.vo.UserListVo;
@@ -33,6 +35,10 @@ public class AdminController {
 
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private JobService jobService;
 
     @RequestMapping(value = {"/","/{pageNum}"},method = RequestMethod.GET)
     public ModelAndView index(@PathVariable(required = false) Integer pageNum) {
@@ -60,6 +66,10 @@ public class AdminController {
         if(id == null || id.length() != 32) {
             return ServerResponse.createByErrorMessage("删除失败");
         }
+        //要删除的: 分类,Job
+        //先删Job
+        jobService.deleteByUserId(id);
+        categoryService.deleteByUserId(id);
         return userService.delete(id);
     }
 

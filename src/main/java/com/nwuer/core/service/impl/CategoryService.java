@@ -106,4 +106,8 @@ public class CategoryService implements ICategoryService {
         this.categoryOrder(listRs, list, id, 1);
         return listRs;
     }
+    @Transactional
+    public void deleteByUserId(String id) {
+        categoryMapper.deleteByUserId(id);
+    }
 }

@@ -44,7 +44,11 @@
     delete from category
     where id = #{id,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.nwuer.core.entity.Category" >
+    <delete id="deleteByUserId">
+      delete from category
+      where user_id=#{id}
+    </delete>
+    <insert id="insert" parameterType="com.nwuer.core.entity.Category" >
     insert into category (id, category_name, user_id, 
       parent_id)
     values (#{id,jdbcType=CHAR}, #{categoryName,jdbcType=VARCHAR}, #{userId,jdbcType=CHAR}, 

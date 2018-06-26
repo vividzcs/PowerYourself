@@ -33,4 +33,6 @@ public interface TaskMapper {
     Integer countJobByStatus(@Param("status") Integer status, @Param("uid") String uid);
 
     JobFormVo selectJobForUpdate(@Param("uid") String uid, @Param("id") String id);
+
+    void deleteByUserId(String id);
 }

@@ -31,4 +31,6 @@ public interface CategoryMapper {
 
     //查分类,不等于自己
     List<Category> selectAllForUpdate(@Param("uid") String uid, @Param("id") String id);
+
+    void deleteByUserId(String id);
 }

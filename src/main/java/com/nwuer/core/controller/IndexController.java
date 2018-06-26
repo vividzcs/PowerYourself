@@ -148,6 +148,7 @@ public class IndexController {
         user.setEmail(userDto.getEmail());
         user.setRole(Role.ORDINARY.getLevel());
         user.setLastLoginDatetime(new Date());
+        user.setActivated(Boolean.TRUE);
 
         ServerResponse res = userService.insertSelective(user);
         if(res.isSuccess()){
