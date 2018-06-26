@@ -5,6 +5,10 @@ import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.dto.UserDto;
 import com.nwuer.core.entity.User;
 import com.nwuer.core.pojo.VerificationToken;
+import com.nwuer.core.vo.LoginFormVo;
+
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author harbo
@@ -17,12 +21,6 @@ public interface IUserService {
      */
     User findTopUserByUsername(UserDto user);
 
-    /**
-     * 创建新用户
-     * @param userDto 用户对象
-     * @return 新用户
-     */
-    User createNewAccount(UserDto userDto);
 
     boolean verifyEmailExistence(String email);
 
@@ -34,7 +32,7 @@ public interface IUserService {
      */
 //    UserDto login(UserDto userDto);
 
-    ServerResponse<String> login(UserDto userDto);
+    ServerResponse<String> login(LoginFormVo loginFormVo);
 
     User getUser(String verificationToken);
 
@@ -45,4 +43,8 @@ public interface IUserService {
     VerificationToken getVerificationToken(String VerificationToken);
 
     VerificationToken generateNewVerificationToken(String oldToken);
+
+    ServerResponse forget(String username,String url) throws UnsupportedEncodingException, MessagingException;
+
+    void reset(String token);
 }

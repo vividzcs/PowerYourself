@@ -30,6 +30,16 @@
     SELECT count(1) from task
     where task_category_id=#{id}
   </select>
+    <select id="selectVoById" resultType="com.nwuer.core.vo.CategoryFormVo">
+      SELECT id,category_name,parent_id,user_id
+      from category
+      where id=#{id}
+    </select>
+  <select id="selectAllForUpdate" resultType="com.nwuer.core.entity.Category">
+    SELECT * from category
+      where user_id=#{uid}
+      and id != #{id}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from category
     where id = #{id,jdbcType=CHAR}
@@ -72,6 +82,21 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.nwuer.core.entity.Category" >
+    update category
+    <set >
+      <if test="categoryName != null" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByIdAndVo" parameterType="com.nwuer.core.vo.CategoryFormVo" >
     update category
     <set >
       <if test="categoryName != null" >

@@ -2,6 +2,7 @@ package com.nwuer.core.configuration;
 
 import org.quartz.Scheduler;
 import org.quartz.ee.servlet.QuartzInitializerListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +19,27 @@ import java.util.Properties;
  */
 @Configuration
 public class SchedulerConfig {
-	
-	@Bean
-	public SchedulerFactoryBean schedulerFactoryBean() throws Exception {
-		SchedulerFactoryBean factory = new SchedulerFactoryBean();
-		factory.afterPropertiesSet();
-		factory.setQuartzProperties(quartzProperties());;
-		return factory;
-	}
+
+    @Autowired
+    private MyJobFactory myJobFactory;
+
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
+        SchedulerFactoryBean factory = new SchedulerFactoryBean();
+
+        factory.setOverwriteExistingJobs(true);
+
+        // 延时启动
+        factory.setStartupDelay(20);
+
+        // 加载quartz数据源配置
+        factory.setQuartzProperties(quartzProperties());
+
+        // 自定义Job Factory，用于Spring注入
+        factory.setJobFactory(myJobFactory);
+
+        return factory;
+    }
 	
 	@Bean
     public Properties quartzProperties() throws IOException {

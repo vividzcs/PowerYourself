@@ -1,18 +1,19 @@
 body{
     font-family: 'Microsoft YaHei', sans-serif;
+    padding-top: 4rem;
 }
 
-/*½ø¶ÈÌõ*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 .progress {
     margin-bottom: 15px;
 }
-/*Í·Ïñ*/
+/*Í·ï¿½ï¿½*/
 .wh64{
     width: 64px;
     height: 64px;
     border-radius:50% ;
 }
-/*±ß¾à*/
+/*ï¿½ß¾ï¿½*/
 .mar_t15{
     margin-top: 15px;
 }

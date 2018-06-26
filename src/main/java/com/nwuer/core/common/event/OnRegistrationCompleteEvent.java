@@ -1,7 +1,7 @@
 package com.nwuer.core.common.event;
 
 import com.nwuer.core.controller.IndexController;
-import com.nwuer.core.entity.User;
+import com.nwuer.core.dto.UserDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
@@ -22,9 +22,9 @@ public class OnRegistrationCompleteEvent extends ApplicationEvent {
     /**
      * 注册完成dao返回的用户类
      */
-    private User user;
+    private UserDto user;
 
-    public OnRegistrationCompleteEvent(User user, String appUrl) {
+    public OnRegistrationCompleteEvent(UserDto user, String appUrl) {
         super(user);
 
         this.user = user;

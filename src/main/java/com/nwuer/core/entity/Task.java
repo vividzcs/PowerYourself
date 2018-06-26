@@ -1,64 +1,45 @@
 package com.nwuer.core.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Task {
     private String id;
 
     private String title;
 
-    private LocalDateTime beganTime;
+    private Date beganTime;
 
-    private LocalDateTime endTime;
+    private Date endTime;
 
-    private Boolean allDayTask;
-
-    private Boolean taskModified;
-
-    private String remindTime;
-
-    private String repeatPolicyId;
-
-    private String repetitionEndConditionId;
+    private Date remindTime;
 
     private String location;
 
-    private String notation;
+    private String userId;
+
+    private Byte isFinished = 0;
 
     private String taskCategoryId;
 
-    private String userId;
+    private String notation;
 
-
-
-    public Task(String id, String title, LocalDateTime beganTime, LocalDateTime endTime, Boolean allDayTask, Boolean taskModified, String remindTime, String repeatPolicyId, String repetitionEndConditionId, String location, String notation, String taskCategoryId,String userId) {
+    public Task(String id, String title, Date beganTime, Date endTime, Date remindTime, String location, String userId, Byte isFinished, String taskCategoryId, String notation) {
         this.id = id;
         this.title = title;
         this.beganTime = beganTime;
         this.endTime = endTime;
-        this.allDayTask = allDayTask;
-        this.taskModified = taskModified;
         this.remindTime = remindTime;
-        this.repeatPolicyId = repeatPolicyId;
-        this.repetitionEndConditionId = repetitionEndConditionId;
         this.location = location;
-        this.notation = notation;
-        this.taskCategoryId = taskCategoryId;
         this.userId = userId;
+        this.isFinished = isFinished;
+        this.taskCategoryId = taskCategoryId;
+        this.notation = notation;
     }
 
     public Task() {
         super();
     }
 
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
     public String getId() {
         return id;
     }
@@ -75,60 +56,28 @@ public class Task {
         this.title = title == null ? null : title.trim();
     }
 
-    public LocalDateTime getBeganTime() {
+    public Date getBeganTime() {
         return beganTime;
     }
 
-    public void setBeganTime(LocalDateTime beganTime) {
+    public void setBeganTime(Date beganTime) {
         this.beganTime = beganTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
-    public Boolean getAllDayTask() {
-        return allDayTask;
-    }
-
-    public void setAllDayTask(Boolean allDayTask) {
-        this.allDayTask = allDayTask;
-    }
-
-    public Boolean getTaskModified() {
-        return taskModified;
-    }
-
-    public void setTaskModified(Boolean taskModified) {
-        this.taskModified = taskModified;
-    }
-
-    public String getRemindTime() {
+    public Date getRemindTime() {
         return remindTime;
     }
 
-    public void setRemindTime(String remindTime) {
-        this.remindTime = remindTime == null ? null : remindTime.trim();
-    }
-
-    public String getRepeatPolicyId() {
-        return repeatPolicyId;
-    }
-
-    public void setRepeatPolicyId(String repeatPolicyId) {
-        this.repeatPolicyId = repeatPolicyId == null ? null : repeatPolicyId.trim();
-    }
-
-    public String getRepetitionEndConditionId() {
-        return repetitionEndConditionId;
-    }
-
-    public void setRepetitionEndConditionId(String repetitionEndConditionId) {
-        this.repetitionEndConditionId = repetitionEndConditionId == null ? null : repetitionEndConditionId.trim();
+    public void setRemindTime(Date remindTime) {
+        this.remindTime = remindTime;
     }
 
     public String getLocation() {
@@ -139,12 +88,20 @@ public class Task {
         this.location = location == null ? null : location.trim();
     }
 
-    public String getNotation() {
-        return notation;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setNotation(String notation) {
-        this.notation = notation == null ? null : notation.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
+    }
+
+    public Byte getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(Byte isFinished) {
+        this.isFinished = isFinished;
     }
 
     public String getTaskCategoryId() {
@@ -153,5 +110,13 @@ public class Task {
 
     public void setTaskCategoryId(String taskCategoryId) {
         this.taskCategoryId = taskCategoryId == null ? null : taskCategoryId.trim();
+    }
+
+    public String getNotation() {
+        return notation;
+    }
+
+    public void setNotation(String notation) {
+        this.notation = notation == null ? null : notation.trim();
     }
 }

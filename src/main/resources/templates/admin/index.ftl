@@ -1,229 +1,84 @@
 <#include "header.ftl" />
-<!--导航-->
 
 <div class="container">
     <div class="row">
         <div class="col-md-2">
             <div class="list-group">
-                <a href="user_list.html" class="list-group-item active">用户管理</a>
-                <a href="uesr_search.html" class="list-group-item">用户搜索</a>
-
+                <a href="/admin/" class="list-group-item active">人员管理</a>
+                <a href="/admin/to_search" role="button" class="list-group-item" data-toggle="modal" data-target="#myModal">人员搜索</a>
             </div>
         </div>
         <div class="col-md-10">
             <div class="page-header">
-                <h1>用户管理</h1>
+                <h1>人员管理</h1>
             </div>
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="user_list.html">用户列表</a>
+                    <a href="/admin/">人员列表</a>
                 </li>
                 <li>
-                    <a href="uesr_search.html">用户搜索</a>
+                    <a href="/admin/to_search">人员搜索</a>
                 </li>
             </ul>
             <table class="table">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>用户名</th>
-                    <th>邮箱</th>
+                    <th>人员名</th>
+                    <th>Email</th>
+                    <th>上一次登录</th>
+                    <th>状态</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>张三</td>
-                    <td>123456789@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>李四</td>
-                    <td>121265489@QQ.com</td>
-                    <td>
-                        <div role="presentation" class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                操作<span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">删除</a></li>
-                                <li><a href="#">锁定</a></li>
-                                <li><a href="#">修改密码</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
+                <#if allUser?exists && (allUser.list?size>0)>
+                    <#list allUser.list as user>
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${(user.lastLoginDatetime?string("yyyy/MM/dd hh:mm"))!}</td>
+                        <td>${user.activated?string("已激活","未激活")}</td>
+                        <td>
+                            <div role="presentation" class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"
+                                        role="button" aria-haspopup="true" aria-expanded="false">
+                                    操作<span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/admin/freeze/${user.id}"
+                                           onclick="confirmdelete(event,url=this.href)">冻结</a></li>
+                                    <li><a href="/admin/active/${user.id}"
+                                           onclick="confirmdelete(event,url=this.href)">激活</a></li>
+                                    <li><a href="/admin/delete/${user.id}"
+                                           onclick="confirmdelete(event,url=this.href)">删除</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </#list>
+                </#if>
                 </tbody>
             </table>
             <nav class="pull-right">
                 <ul class="pagination">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2 </a></li>
-                    <li><a href="#">3 </a></li>
-                    <li><a href="#">4 </a></li>
-                    <li><a href="#">5 </a></li>
-                    <li><a href="#">6 </a></li>
-                    <li><a href="#"><span aria-hidden="true">&raquo;</span></a></li>
+        <#if allUser.hasPreviousPage>
+            <li><a href="/admin/user/${allUser.prePage}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+        <#else >
+            <li class="disabled"><span aria-hidden="true">&laquo;</span></li>
+        </#if>
+
+        <#list allUser.navigatepageNums as nav>
+            <li ${(nav == allUser.pageNum)?string("class='active'","")}><a href="/admin/user/${nav}">${nav}</a></li>
+        </#list>
+        <#if allUser.hasNextPage>
+            <li><a href="/admin/user/${allUser.nextPage}"><span aria-hidden="true">&raquo;</span></a></li>
+        <#else >
+            <li class="disabled"><span aria-hidden="true">&raquo;</span></li>
+        </#if>
+
                 </ul>
             </nav>
         </div>
@@ -232,5 +87,24 @@
 
 <#include "footer.ftl" />
 
+<script>
+    function confirmdelete(event, url) {
+        if (!confirm("确认要冻结或删除吗")) {
+
+        } else {
+            $.post(url, function (res) {
+                console.log(res);
+                if (res.status == 0) {
+                    //成功
+                    window.location.href = "/admin/";
+                } else {
+                    alert(res.msg)
+                }
+            })
+        }
+        event.returnValue = false;
+
+    }
+</script>
 </body>
 </html>

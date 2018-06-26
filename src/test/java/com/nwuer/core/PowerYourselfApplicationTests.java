@@ -5,7 +5,6 @@ import com.nwuer.core.common.util.MD5;
 import com.nwuer.core.common.util.UuidUtil;
 import com.nwuer.core.dao.UserMapper;
 import com.nwuer.core.entity.User;
-import com.nwuer.core.pojo.PowerYourselfJob;
 import com.nwuer.core.pojo.Role;
 import com.nwuer.core.service.impl.JobAndTriggerServiceImpl;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
+import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,21 +31,21 @@ public class PowerYourselfApplicationTests {
 	 */
 	@Test
 	public void contextLoads() throws SchedulerException {
-		PowerYourselfJob job = new PowerYourselfJob();
-		job.setJobName("测试");
-		job.setCronExpression("0 26 0  * * ?");
-		jobAndTriggerService.addJob(job); //pass
+//		PowerYourselfJob job = new PowerYourselfJob();
+//		job.setJobName("测试");
+//		job.setCronExpression("0 26 0  * * ?");
+//		jobAndTriggerService.addJob(job); //pass
 
 //		System.out.println(jobAndTriggerService.queryJob(3,3));  //
 //		jobAndTriggerService.pauseJob("测试","default");
 //		jobAndTriggerService.resumeJob("测试","default");
 //		jobAndTriggerService.rescheduleJob("测试","default","0 27 0  * * ?");
-//		jobAndTriggerService.deleteJob("测试","default");
+		jobAndTriggerService.deleteJob("测试","93a4f11759024d5eb06a3b99b2d97526");
 	}
 
 	@Test
 	public void test() throws ParseException {
-		System.out.println(DateParseForCronExpressionUtil.parse("2019-04-22 22:12:33"));
+		System.out.println(DateParseForCronExpressionUtil.parse("2019/04/22 22:12").toString());
 
 	}
 
@@ -62,8 +62,14 @@ public class PowerYourselfApplicationTests {
 		userMapper.insert(user);
 	}
 
-	public void addUser() {
+	@Test
+	public void addJsr() throws ParseException {
+//		System.out.println();
+
+		Date date1 = DateParseForCronExpressionUtil.getDate("2019/04/22 22:12");
+//		date1.after()
 
 	}
+
 
 }

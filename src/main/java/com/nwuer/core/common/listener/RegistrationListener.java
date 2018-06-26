@@ -1,16 +1,20 @@
 package com.nwuer.core.common.listener;
 
+import com.nwuer.core.common.Const;
 import com.nwuer.core.common.event.OnRegistrationCompleteEvent;
-import com.nwuer.core.entity.User;
+import com.nwuer.core.dto.UserDto;
 import com.nwuer.core.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 注册完成的监听器
@@ -53,37 +57,50 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
      */
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
-        confirmRegistration(event);
+        try {
+            confirmRegistration(event);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
      * 真正处理事件的方法
      * @param event the event to respond to
      */
-    private void confirmRegistration(OnRegistrationCompleteEvent event) {
+    private void confirmRegistration(OnRegistrationCompleteEvent event) throws MessagingException, UnsupportedEncodingException {
         //拿到user
-        User user = event.getUser();
-        //随机生成token
-        String token = UUID.randomUUID().toString();
-        //利用token，调用userService，生成验证码
-        service.createVerificationToken(user, token);
-
+        UserDto user = event.getUser();
         //拿到用户的邮箱
         String recipientAddress = user.getEmail();
 
         //构造邮件
         String subject = "是您注册了" + brand + "吗？请确认您的邮箱";
         String confirmationUrl
-                = event.getAppUrl() + "/registrationConfirm?token=" + token;
-        String message = "点击一下链接，即可激活您的账户。";
+                = Const.URL_PREFIX + "/registrationConfirm/"+user.getId();
 
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom(senderEmail);
-        email.setTo(recipientAddress);
-        email.setSubject(subject);
-        email.setText(message + System.lineSeparator() + brand + confirmationUrl);
+        String message = "<h2>点击链接,确认注册</h2>";
+
+        /////////////////////////
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        InternetAddress from = new InternetAddress();
+        from.setAddress(senderEmail);
+        from.setPersonal(brand, "UTF-8");
+
+        helper.setFrom(from);
+        helper.setTo(user.getEmail());
+        helper.setSubject(subject);
+        StringBuilder sb = new StringBuilder(message);
+        sb.append("<br/>");
+        sb.append(brand);
+        sb.append(":"+confirmationUrl);
+        helper.setText(sb.toString(), true);
 
         //发送邮件
-        mailSender.send(email);
+        mailSender.send(mimeMessage);
     }
 }

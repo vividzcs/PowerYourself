@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>标题</title>
+    <title>来自PwoerYourself的提醒</title>
 </head>
 <body>
-    <h1>${str1}</h1>
+<h2>Content: ${desc}</h2>
 
-    <h3>${str2}</h3>
+任务已完成: ${done_url}?primary=${user_id}&primary1=${job_id}<br/>
+任务已完成: ${delete_url}?primary=${user_id}&primary1=${job_id}
 </body>
 </html>

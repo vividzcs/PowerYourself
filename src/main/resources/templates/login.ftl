@@ -13,18 +13,25 @@
 					<div class="form-horizontal">
 						<span class="heading">PowerYourself--登录</span>
 						<div class="form-group">
-							<input name="username" type="text" autocomplete="false" class="form-control" id="username" value="请输入用户名" />
+							<input name="username" type="text" autocomplete="new-password" class="form-control" id="username" value="请输入用户名" />
 						</div>
 						<div class="form-group">
-							<input name="password" type="password" class="form-control" id="password" value="请输入密码" />
+							<input name="password" type="password" autocomplete="new-password" class="form-control" id="password" value="请输入密码" />
 						</div>
 						<div class="form-group">
 							<li class="li4">
 								<input class="submit" type="button" id="btnSubmit" value="登录" onclick="check()">
 							</li>
+
 							<li class="li3">
-								<a  class="visitor" href="register.ftl">>>>> 注册</a>
+								<a  class="visitor" href="to_register">>>>> 注册</a>
        						</li>
+                            <li class="li3">
+                                <a  class="visitor" href="to_forget">??忘记密码</a>
+                            </li>
+                            <li class="li3">
+                                <a  class="visitor" href="/">>> 回到首页</a>
+                            </li>
 							<li class="li3" id="warn" style="display: none"></li>
 						</div>
 					</div>
@@ -68,7 +75,7 @@
 			
 		$('#password').blur(function () { 
 			if ($('#password').val() == '') { 
-				$('#password').val('密码不能为空'); 
+				$('#password').val('111111');
 				$('#password').css({'color':'red'}); 
 			} 
 		}) 
@@ -77,19 +84,18 @@
 		});
 
 		function check () {
-			/*if ($('#username').val() == 'Zazzing' && $('#password').val() == '123456') {
-				alert('登录成功！');
-				window.open('index.html');
-			}
-			else {
-				alert('登录失败！');
-			}*/
 			var data = {'username':$('#username').val(),'password':$('#password').val()}
 			$.post('/login',data,function(res){
 			    var warn = $("#warn")
 			    if(!res.status) {
 					//跳转
-					window.location.href = "/user/"
+					// alert(res.data.role)
+					if(res.data.role == "10"){
+                        window.location.href = "/user/"
+					}else{
+                        window.location.href = "/admin/"
+					}
+
 				}else{
 			        warn.css('display','block').css('color','red');
 			        warn.html(res.msg);

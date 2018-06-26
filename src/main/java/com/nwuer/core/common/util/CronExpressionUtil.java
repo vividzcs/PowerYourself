@@ -18,7 +18,7 @@ public class CronExpressionUtil {
      * 所有字段都自定义
      * 秒 分 时 日 月 周 年
      */
-    public static String getCronExpression(int second,int minute,int hour
+    public static String getCronExpressionSpecialDay(int second,int minute,int hour
             ,int day,int month,int week,int year){
         StringBuilder sb = new StringBuilder();
         sb.append(second);
@@ -30,32 +30,27 @@ public class CronExpressionUtil {
         sb.append(day);
         sb.append(" ");
         sb.append(month);
-        sb.append(" ");
-        sb.append(week);
+        sb.append(" ?");
         sb.append(" ");
         sb.append(year);
         return sb.toString();
     }
 
-    /**
-     *
-     * @return
-     */
-    public static String getCronExpression(int second,int minute,int hour
-            ,int day,int month,int week){
+    public static String getCronExpressionSpecialWeek(int second,int minute,int hour
+            ,int day,int month,int week,int year){
         StringBuilder sb = new StringBuilder();
         sb.append(second);
         sb.append(" ");
         sb.append(minute);
         sb.append(" ");
         sb.append(hour);
-        sb.append(" ");
-        sb.append(day);
+        sb.append(" ?");
         sb.append(" ");
         sb.append(month);
         sb.append(" ");
         sb.append(week);
-        sb.append(" *");
+        sb.append(" ");
+        sb.append(year);
         return sb.toString();
     }
 

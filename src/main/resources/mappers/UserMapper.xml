@@ -26,13 +26,56 @@
     from user
     where id = #{id,jdbcType=CHAR}
   </select>
-    <select id="findByUsernameAndPassword" resultType="com.nwuer.core.entity.User">
-      SELECT * from user
+    <select id="findByUsernameAndPassword" resultType="com.nwuer.core.dto.UserDto">
+      SELECT id,username,password,email,last_login_datetime,role
+      from user
       where username=#{username}
       and password=#{password}
+      and activated=1
 
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <select id="hasUser" resultType="com.nwuer.core.dto.UserDto">
+    SELECT id,username,password,email,last_login_datetime,role
+    from user
+    where username=#{username}
+  </select>
+  <select id="selectById" resultType="com.nwuer.core.dto.UserDto">
+    SELECT id,username,password,email,last_login_datetime,role
+    from user
+    where id=#{id}
+  </select>
+  <select id="selectAll" resultType="com.nwuer.core.vo.UserListVo">
+    select id,username,email,last_login_datetime,activated
+    from user where role=#{level}
+  </select>
+  <select id="selectUserBySearch" resultType="com.nwuer.core.vo.UserListVo">
+    select id,username,email,last_login_datetime,activated
+    from user
+    where
+    <if test='search_item == "id"' >
+      id LIKE concat(concat('%',#{search_value}),'%')
+    </if>
+    <if test='search_item == "username"' >
+      username LIKE concat(concat('%',#{search_value}),'%')
+    </if>
+    <if test='search_item == "email"' >
+      email LIKE concat(concat('%',#{search_value}),'%')
+    </if>
+
+  </select>
+  <select id="verifyEmailExistence" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where email=#{email}
+  </select>
+  <select id="verifyUsernameExistence" resultType="java.lang.Integer">
+    select count(1)
+    from user
+    where username=#{username}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
     where id = #{id,jdbcType=CHAR}
   </delete>
@@ -137,9 +180,7 @@
       <if test="phoneNumber != null" >
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
-      <if test="lastLoginDatetime != null" >
-        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
-      </if>
+        last_login_datetime = now(),
       <if test="lastLoginIp != null" >
         last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       </if>
@@ -167,6 +208,41 @@
       avatar = #{avatar,jdbcType=VARCHAR},
       role = #{role,jdbcType=CHAR},
       activated = #{activated,jdbcType=BIT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+    <update id="updateLoginTime">
+      UPDATE user
+      set last_login_datetime = #{date}
+      where id=#{id}
+    </update>
+  <update id="reset">
+    update user
+    set password=#{passNew}
+    where id=#{token}
+  </update>
+  <update id="freezeUser">
+    update user
+    set activated=0
+    where id=#{id}
+  </update>
+  <update id="activeUser">
+    update user
+    set activated=1
+    where id=#{id}
+  </update>
+  <update id="updateUserSelective" parameterType="com.nwuer.core.vo.RegistrationFormVo" >
+    update user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

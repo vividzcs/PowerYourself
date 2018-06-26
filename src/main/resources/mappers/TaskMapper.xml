@@ -5,47 +5,56 @@
     <constructor >
       <idArg column="id" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="began_time" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
-      <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime" />
-      <arg column="all_day_task" jdbcType="BIT" javaType="java.lang.Boolean" />
-      <arg column="task_modified" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="began_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="remind_time" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="repeat_policy_id" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="repetition_end_condition_id" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="notation" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="is_finished" jdbcType="TINYINT" javaType="java.lang.Byte" />
       <arg column="task_category_id" jdbcType="CHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.nwuer.core.entity.Task" >
+    <constructor >
+      <idArg column="id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="began_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="end_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="remind_time" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="location" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="is_finished" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="task_category_id" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="notation" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
   <sql id="Base_Column_List" >
-    id, title, began_time, end_time, all_day_task, task_modified, remind_time, repeat_policy_id, 
-    repetition_end_condition_id, location, notation, task_category_id
+    id, title, began_time, end_time, remind_time, location, user_id, is_finished, task_category_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <sql id="Blob_Column_List" >
+    notation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from task
     where id = #{id,jdbcType=CHAR}
   </select>
-    <select id="selectAll" resultType="com.nwuer.core.entity.Task">
-      SELECT * from task
-      where user_id=#{id}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from task
     where id = #{id,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.nwuer.core.entity.Task" >
     insert into task (id, title, began_time, 
-      end_time, all_day_task, task_modified, 
-      remind_time, repeat_policy_id, repetition_end_condition_id, 
-      location, notation, task_category_id
-      )
+      end_time, remind_time, location, 
+      user_id, is_finished, task_category_id, 
+      notation)
     values (#{id,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{beganTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{allDayTask,jdbcType=BIT}, #{taskModified,jdbcType=BIT}, 
-      #{remindTime,jdbcType=VARCHAR}, #{repeatPolicyId,jdbcType=CHAR}, #{repetitionEndConditionId,jdbcType=CHAR}, 
-      #{location,jdbcType=VARCHAR}, #{notation,jdbcType=VARCHAR}, #{taskCategoryId,jdbcType=CHAR}
-      )
+      #{endTime,jdbcType=TIMESTAMP}, #{remindTime,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=CHAR}, #{isFinished,jdbcType=TINYINT}, #{taskCategoryId,jdbcType=CHAR}, 
+      #{notation,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nwuer.core.entity.Task" >
     insert into task
@@ -62,29 +71,23 @@
       <if test="endTime != null" >
         end_time,
       </if>
-      <if test="allDayTask != null" >
-        all_day_task,
-      </if>
-      <if test="taskModified != null" >
-        task_modified,
-      </if>
       <if test="remindTime != null" >
         remind_time,
-      </if>
-      <if test="repeatPolicyId != null" >
-        repeat_policy_id,
-      </if>
-      <if test="repetitionEndConditionId != null" >
-        repetition_end_condition_id,
       </if>
       <if test="location != null" >
         location,
       </if>
-      <if test="notation != null" >
-        notation,
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="isFinished != null" >
+        is_finished,
       </if>
       <if test="taskCategoryId != null" >
         task_category_id,
+      </if>
+      <if test="notation != null" >
+        notation,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -100,29 +103,23 @@
       <if test="endTime != null" >
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="allDayTask != null" >
-        #{allDayTask,jdbcType=BIT},
-      </if>
-      <if test="taskModified != null" >
-        #{taskModified,jdbcType=BIT},
-      </if>
       <if test="remindTime != null" >
         #{remindTime,jdbcType=VARCHAR},
-      </if>
-      <if test="repeatPolicyId != null" >
-        #{repeatPolicyId,jdbcType=CHAR},
-      </if>
-      <if test="repetitionEndConditionId != null" >
-        #{repetitionEndConditionId,jdbcType=CHAR},
       </if>
       <if test="location != null" >
         #{location,jdbcType=VARCHAR},
       </if>
-      <if test="notation != null" >
-        #{notation,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="isFinished != null" >
+        #{isFinished,jdbcType=TINYINT},
       </if>
       <if test="taskCategoryId != null" >
         #{taskCategoryId,jdbcType=CHAR},
+      </if>
+      <if test="notation != null" >
+        #{notation,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -138,31 +135,38 @@
       <if test="endTime != null" >
         end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="allDayTask != null" >
-        all_day_task = #{allDayTask,jdbcType=BIT},
-      </if>
-      <if test="taskModified != null" >
-        task_modified = #{taskModified,jdbcType=BIT},
-      </if>
       <if test="remindTime != null" >
         remind_time = #{remindTime,jdbcType=VARCHAR},
-      </if>
-      <if test="repeatPolicyId != null" >
-        repeat_policy_id = #{repeatPolicyId,jdbcType=CHAR},
-      </if>
-      <if test="repetitionEndConditionId != null" >
-        repetition_end_condition_id = #{repetitionEndConditionId,jdbcType=CHAR},
       </if>
       <if test="location != null" >
         location = #{location,jdbcType=VARCHAR},
       </if>
-      <if test="notation != null" >
-        notation = #{notation,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="isFinished != null" >
+        is_finished = #{isFinished,jdbcType=TINYINT},
       </if>
       <if test="taskCategoryId != null" >
         task_category_id = #{taskCategoryId,jdbcType=CHAR},
       </if>
+      <if test="notation != null" >
+        notation = #{notation,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nwuer.core.entity.Task" >
+    update task
+    set title = #{title,jdbcType=VARCHAR},
+      began_time = #{beganTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      remind_time = #{remindTime,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      is_finished = #{isFinished,jdbcType=TINYINT},
+      task_category_id = #{taskCategoryId,jdbcType=CHAR},
+      notation = #{notation,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nwuer.core.entity.Task" >
@@ -170,14 +174,44 @@
     set title = #{title,jdbcType=VARCHAR},
       began_time = #{beganTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      all_day_task = #{allDayTask,jdbcType=BIT},
-      task_modified = #{taskModified,jdbcType=BIT},
       remind_time = #{remindTime,jdbcType=VARCHAR},
-      repeat_policy_id = #{repeatPolicyId,jdbcType=CHAR},
-      repetition_end_condition_id = #{repetitionEndConditionId,jdbcType=CHAR},
       location = #{location,jdbcType=VARCHAR},
-      notation = #{notation,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=CHAR},
+      is_finished = #{isFinished,jdbcType=TINYINT},
       task_category_id = #{taskCategoryId,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
+  <update id="doneJob">
+    UPDATE task
+    set is_finished=1
+    where id=#{id}
+  </update>
+
+  <update id="checkJobStatus">
+      update task set is_finished=2
+      where user_id=#{uid}
+      and unix_timestamp(end_time)&lt;unix_timestamp(now())
+  </update>
+
+  <select id="selectAll" resultType="com.nwuer.core.vo.JobListVo">
+    SELECT task.id,task.title,task.began_time,task.remind_time,task.end_time,category.category_name,notation
+    from task join category on task.task_category_id=category.id
+    where task.user_id=#{uid}
+    and is_finished=#{is_finished}
+    <if test="id != null" >
+      and task_category_id = #{id}
+    </if>
+  </select>
+    <select id="countJobByStatus" resultType="java.lang.Integer">
+    SELECT count(1)
+    from task
+    where is_finished=#{status}
+    and user_id=#{uid}
+    </select>
+  <select id="selectJobForUpdate" resultType="com.nwuer.core.vo.JobFormVo">
+    select id,title,task_category_id,remind_time,end_time,notation
+    from task
+    where id=#{id}
+    and user_id=#{uid}
+  </select>
 </mapper>

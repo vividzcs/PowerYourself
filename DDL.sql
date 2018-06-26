@@ -93,6 +93,7 @@ create table task
 	location varchar(2000) null comment '活动地点',
 	notation varchar(5000) null comment '备注',
 	task_category_id char(36) not null comment '任务分类UUID',
+	CONSTRAINTS task_title UNIQUE (title),
 	constraint task_repeat_policy_id_fk
 		foreign key (repeat_policy_id) references repeat_policy (id)
 			on update cascade on delete cascade,

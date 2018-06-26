@@ -8,9 +8,16 @@
 
 .content {
     line-height:3rem;
-    position: relative;
-    right: 82%;
-    z-index: 100;
     display: block;
+    position: absolute;
     white-space:nowrap;text-overflow:ellipsis;
+}
+#job_list{
+    list-style: none;
+}
+
+#job_list .caret {
+    height: 3rem;
+    line-height: 3rem;
+    float: left;
 }

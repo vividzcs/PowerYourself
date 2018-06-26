@@ -16,7 +16,6 @@ import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,7 +27,8 @@ import java.util.Map;
 @Slf4j
 @Service
 public class MailSendService {
-    private static final String template = "mail/mail.ftl"; //邮件发送的模板
+    private static final String template = "mail/mail.ftl"; //提醒邮件发送的模板
+    private static final String templateForget = "mail/mail.ftl"; //忘记密码发送邮件的模板
 
     private final FreeMarkerConfigurer configurer;
     private final JavaMailSenderImpl javaMailSenderImpl;
@@ -44,10 +44,8 @@ public class MailSendService {
         this.javaMailSenderImpl = javaMailSenderImpl;
     }
 
-    public void sendEmail(String to, String str1, String str2) {
-        Map<String, String> map = new HashMap<>();
-        map.put(str1, str1);
-        map.put(str2, str2);
+    public void sendEmail(String to,Map<String,String> map) {
+
         try {
             String text = getTextByTemplate(template, map);
             send(to, text);

@@ -1,11 +1,13 @@
 <#include "header.ftl" />
- <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+ <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css"/>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
             <div class="list-group">
-                <a href="content.html" class="list-group-item">内容管理</a>
-                <a href="content_post.html" class="list-group-item active">添加内容</a>
+                <a href="/user/job/" class="list-group-item">正常任务</a>
+                <a href="/user/job/finished" class="list-group-item">已完成任务</a>
+                <a href="/user/job/over_date" class="list-group-item">过期任务</a>
+                <a href="/user/job/to_add" class="list-group-item active">添加任务</a>
             </div>
         </div>
         <div class="col-md-10">
@@ -14,26 +16,35 @@
             </div>
             <ul class="nav nav-tabs">
                 <li>
-                    <a href="content.html">内容管理</a>
+                    <a href="/user/job/">正常任务</a>
+                </li>
+                <li>
+                    <a href="/user/job/finished">已完成任务</a>
+                </li>
+                <li>
+                    <a href="/user/job/over_date">过期任务</a>
                 </li>
                 <li class="active">
-                    <a href="content_post.html">添加内容</a>
+                    <a href="/user/job/to_add">添加任务</a>
                 </li>
+                <li style="color: red;">${msg!}</li>
             </ul>
-            <form action="#" class="mar_t15">
+            <form action="/user/job/add" class="mar_t15" method="post">
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" id="title" class="form-control" placeholder="请输入文章标题">
+                    <input type="text" id="title" name="title" class="form-control" placeholder="请输入任务标题">
                 </div>
                 <div class="form-group">
-                    <label for="parentId">所属分类</label>
-                    <select id="parentId" name="parentId" class="form-control">
-                        <option value="0">顶级分类</option>
+                    <label for="taskCategoryId">所属分类</label>
+                    <select id="taskCategoryId" name="taskCategoryId" class="form-control">
+                            <#list allCategoryOrdered as ordered>
+                                <option value="${ordered[0].id}">${ordered[1]}${ordered[0].categoryName}</option>
+                            </#list>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="datetimepicker" >提醒时间</label>
-                    <input type="text" class="form-control" name="beginTime" class="beginTime" value="" id="datetimepicker"  placeholder="请输入提醒时间"/>
+                    <input type="text" class="form-control" name="remindTime" class="beginTime" value="" id="datetimepicker"  placeholder="请输入提醒时间"/>
                     <input type="hidden" id="dtp_input1" value="" />
                 </div>
                 <div class="form-group">
@@ -43,14 +54,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="content">文章内容</label>
-                    <textarea id="content" class="form-control" rows="10" cols="10" placeholder="请输入文章正文部分"></textarea>
+                    <label for="content">任务内容</label>
+                    <textarea id="notation" name="notation" class="form-control" rows="10" cols="10" placeholder="请输入任务正文部分"></textarea>
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">全局置顶
-                    </label>
-                    <button type="submit" class="btn btn-default pull-right">发布文章</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default pull-right">发布任务</button>
                 </div>
             </form>
 
@@ -59,7 +67,7 @@
 </div>
 
 <#include "footer.ftl" />
-<script src="js/jquery.datetimepicker.full.js"></script>
+<script src="/js/jquery.datetimepicker.full.js"></script>
 <script>
     $.datetimepicker.setLocale('en');
 

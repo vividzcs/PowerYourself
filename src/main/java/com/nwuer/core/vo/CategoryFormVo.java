@@ -21,4 +21,6 @@ public class CategoryFormVo {
 
     private String userId;
 
+    private String id;
+
 }

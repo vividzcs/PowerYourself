@@ -12,8 +12,9 @@ import java.util.Date;
  */
 public class DateParseForCronExpressionUtil {
 
-    private final static String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private final static String STANDARD_FORMAT = "yyyy/MM/dd HH:mm";
     /**
+     * DateParseForCronExpressionUtil.parse("2019/04/22 22:12")
      * @param time
      * @return 0-6 : 秒 分 时 日 月 星期 年
      * @throws ParseException
@@ -29,8 +30,18 @@ public class DateParseForCronExpressionUtil {
                 calendar.get(11),
                 calendar.get(5),
                 calendar.get(2)+1,
-                calendar.get(7)-1,
+                calendar.get(7),
                 calendar.get(1)
         };
+    }
+
+    /*public static LocalDateTime getLocalDateTime(String time) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(STANDARD_FORMAT);
+        return LocalDateTime.parse(time,dateTimeFormatter);
+    }*/
+
+    public static Date getDate(String time) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(STANDARD_FORMAT);
+        return simpleDateFormat.parse(time);
     }
 }

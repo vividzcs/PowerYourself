@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="list-group">
-                <a href="category_list.ftl" class="list-group-item active">分类管理</a>
+                <a href="/user/category/" class="list-group-item active">分类管理</a>
                 <a href="" role="button"  class="list-group-item" data-toggle="modal" data-target="#myModal">添加分类</a>
             </div>
         </div>
@@ -14,7 +14,7 @@
             </div>
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="category_list.ftl">分类列表</a>
+                    <a href="/user/category/">分类列表</a>
                 </li>
                 <li>
                     <a href="" role="button" data-toggle="modal" data-target="#myModal">添加分类</a>
@@ -23,24 +23,22 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>分类名</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <#list allCategory as cate>
+                    <#list allCategoryOrdered as ordered>
                     <tr>
-                        <th scope="row">${cate.id}</th>
-                        <td>${cate.categoryName}</td>
+                        <td>${ordered[1]}${ordered[0].categoryName}</td>
                         <td>
                             <div role="presentation" class="dropdown">
                                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     操作<span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                   <li><a href="/user/category/edit/${cate.id}">编辑</a></li>
-                                   <li><a href="/user/category/delete/${cate.id}" onclick="confirmdelete(event,url=this.href)">删除</a></li>
+                                   <li><a href="/user/category/edit/${ordered[0].id}">编辑</a></li>
+                                   <li><a href="/user/category/delete/${ordered[0].id}" onclick="confirmdelete(event,url=this.href)">删除</a></li>
                                 </ul>
                             </div>
                         </td>
@@ -48,18 +46,6 @@
                     </#list>
                 </tbody>
             </table>
-            <nav class="pull-right">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2 </a></li>
-                    <li><a href="#">3 </a></li>
-                    <li><a href="#">4 </a></li>
-                    <li><a href="#">5 </a></li>
-                    <li><a href="#">6 </a></li>
-                    <li><a href="#"><span aria-hidden="true">&raquo;</span></a></li>
-                </ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -74,9 +60,8 @@
             <div class="modal-body">
                 <div>
                     <div class="form-group">
-                        <label for="parentId">所属分类</label>
+                        <label for="parentId">所属分类(顶级分类没有所属)</label>
                         <select id="parentId" name="parentId" class="form-control">
-                            <option value="0">顶级分类</option>
                             <#list allCategoryOrdered as ordered>
                                 <option value="${ordered[0].id}">${ordered[1]}${ordered[0].categoryName}</option>
                             </#list>
@@ -100,7 +85,8 @@
 
 <script>
     $("#fmSubmit").click(function(){
-        var parentId = $("#parentId").val();
+        var parentId = ($("#parentId").val()!=null) ? $("#parentId").val() : "00000000000000000000000000000000";
+        console.log(parentId);
         var categoryName = $("#categoryName").val();
         if(parentId == "" || parentId.trim() == ""){
             $("warn").html("参数错误").css("display","block").css("color","red");

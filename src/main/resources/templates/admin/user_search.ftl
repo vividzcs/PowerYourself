@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-md-2">
             <div class="list-group">
-                <a href="user_list.html" class="list-group-item">用户管理</a>
-                <a href="uesr_search.html" class="list-group-item active">用户搜索</a>
+                <a href="/admin/" class="list-group-item">用户管理</a>
+                <a href="/admin/to_search" class="list-group-item active">用户搜索</a>
             </div>
         </div>
         <div class="col-md-10">
@@ -14,35 +14,26 @@
             </div>
             <ul class="nav nav-tabs">
                 <li>
-                    <a href="user_list.html">用户列表</a>
+                    <a href="/admin/">用户列表</a>
                 </li>
                 <li  class="active">
-                    <a href="uesr_search.html">用户搜索</a>
+                    <a href="/admin/to_search">用户搜索</a>
                 </li>
             </ul>
-            <form action="#" class="uesr_search">
-                <div class="alert alert-info" role="alert">
-                    <strong>技巧提示：</strong>
-                    支持模糊搜索和匹配搜索，匹配搜索使用*代替！
-                </div>
+            <form action="/admin/search/" method="post" class="uesr_search">
                 <div class="form-group">
-                    <label for="name">用户名</label>
-                    <input type="texte" id="name" class="form-control" placeholder="请输入用户名">
-                </div>
-                <div class="form-group">
-                    <label for="uid">UID</label>
-                    <input type="text" id="uid" class="form-control" placeholder="输入用户UID">
-                </div>
-                <div class="form-group">
-                    <label for="yonghuzu">选择用户组</label>
-                    <select id="yonghuzu" class="form-control">
-                        <option>限制会员</option>
-                        <option>新手上路</option>
-                        <option>组册会员</option>
-                        <option>中级会员</option>
-                        <option>高级会员</option>
+                    <label for="search_item">选择用户组</label>
+                    <select id="search_item" class="form-control" name="search_item">
+                        <option value="id">UUID</option>
+                        <option value="username">用户名</option>
+                        <option value="email">邮箱</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="name">输入搜索值</label>
+                    <input type="texte" id="name" name="search_value" class="form-control" placeholder="搜索值">
+                </div>
+
                 <button type="submit" class="btn btn-default">提交</button>
             </form>
         </div>

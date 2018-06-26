@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 /**
  * @author harbo
@@ -32,5 +33,9 @@ public class UserDto {
      */
     @NotEmpty
     private String email;
+
+    private Date lastLoginDatetime;
+
+    private String role;
 
 }

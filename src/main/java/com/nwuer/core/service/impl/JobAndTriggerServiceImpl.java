@@ -96,7 +96,7 @@ public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
         scheduler.resumeJob(JobKey.jobKey(jobName,jobGroupName));
     }
 
-    public void rescheduleJob(String jobName,String jobGroupName,String cronExpression) throws SchedulerException {
+    public void rescheduleJob(String jobName,String jobGroupName,String cronExpression,String description) throws SchedulerException {
 
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroupName);
         // 表达式调度构建器
@@ -105,7 +105,7 @@ public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 
         // 按新的cronExpression表达式重新构建trigger
-        trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+        trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withDescription(description).withSchedule(scheduleBuilder).build();
 
         // 按新的trigger重新设置job执行
         scheduler.rescheduleJob(triggerKey, trigger);
@@ -121,7 +121,7 @@ public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName,jobGroupName);
         scheduler.pauseTrigger(triggerKey); //先暂停
         scheduler.unscheduleJob(triggerKey); //取消调度
-        scheduler.deleteJob(JobKey.jobKey(jobName,jobGroupName)); //删除任务
+        boolean flag = scheduler.deleteJob(JobKey.jobKey(jobName,jobGroupName)); //删除任务
     }
 
 }

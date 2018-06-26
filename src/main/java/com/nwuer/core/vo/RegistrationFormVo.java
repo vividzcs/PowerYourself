@@ -1,16 +1,16 @@
 package com.nwuer.core.vo;
 
-import com.nwuer.core.common.annotation.PasswordMatches;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PasswordMatches
 public class RegistrationFormVo {
 
     @Size(min = 5, max = 16, message = "用户名最小不能小于5位，最大不能超过16位")
@@ -22,11 +22,10 @@ public class RegistrationFormVo {
     @NotEmpty(message = "密码不能为空")
     private String password;
 
-    @NotEmpty(message = "重复密码不能为空")
-    private String conformPassword;
-
     @NotEmpty(message = "邮箱不能为空")
     @Pattern(regexp = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)",
             message ="邮箱不正确")
     private String email;
+
+    private String id;
 }

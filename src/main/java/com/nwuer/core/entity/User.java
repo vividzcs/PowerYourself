@@ -2,7 +2,7 @@ package com.nwuer.core.entity;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class User {
     private String id;
@@ -19,7 +19,7 @@ public class User {
 
     private String phoneNumber;
 
-    private LocalDateTime lastLoginDatetime;
+    private Date lastLoginDatetime;
 
     private String lastLoginIp;
 
@@ -29,7 +29,7 @@ public class User {
 
     private Boolean activated;
 
-    public User(String id, String username, String nickname, String password, String email, String phoneNumber, LocalDateTime lastLoginDatetime, String lastLoginIp, String avatar, String role, Boolean activated) {
+    public User(String id, String username, String nickname, String password, String email, String phoneNumber, Date lastLoginDatetime, String lastLoginIp, String avatar, String role, Boolean activated) {
         this.id = id;
         this.username = username;
         this.nickname = nickname;
@@ -95,11 +95,11 @@ public class User {
         this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
-    public LocalDateTime getLastLoginDatetime() {
+    public Date getLastLoginDatetime() {
         return lastLoginDatetime;
     }
 
-    public void setLastLoginDatetime(LocalDateTime lastLoginDatetime) {
+    public void setLastLoginDatetime(Date lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
 

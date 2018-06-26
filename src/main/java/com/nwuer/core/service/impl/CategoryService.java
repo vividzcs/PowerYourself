@@ -9,6 +9,7 @@ import com.nwuer.core.vo.CategoryFormVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CategoryService implements ICategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Transactional
     public ServerResponse addCategory(CategoryFormVo categoryFormVo){
 
         Category category = new Category();
@@ -38,6 +40,7 @@ public class CategoryService implements ICategoryService {
         return ServerResponse.createByErrorMessage("添加品类失败");
     }
 
+    @Transactional
     public ServerResponse delete(String id) {
         if(categoryMapper.countChildren(id) > 0 || categoryMapper.countChildrenJob(id) >0){
             return ServerResponse.createByErrorMessage("分类下还有分类或文章,请删除后再重试");
@@ -76,5 +79,31 @@ public class CategoryService implements ICategoryService {
 
     public List<Category> listCategory(String uid) {
         return categoryMapper.selectAll(uid);
+    }
+
+    public ServerResponse selectById(String id) {
+        CategoryFormVo categoryFormVo = categoryMapper.selectVoById(id);
+        if(categoryFormVo == null){
+            return ServerResponse.createByErrorMessage("参数错误");
+        }else {
+            return ServerResponse.createBySuccess(categoryFormVo);
+        }
+    }
+
+    @Transactional
+    public ServerResponse update(CategoryFormVo categoryFormVo) {
+        int affected = categoryMapper.updateByIdAndVo(categoryFormVo);
+        if(affected > 0){
+            return ServerResponse.createBySuccess("修改成功");
+        }else {
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+    }
+
+    public List<Object[]> getCategoryOrderedForUpdate(String uid,String thisCategory, String id) {
+        List<Category> list = this.categoryMapper.selectAllForUpdate(uid,thisCategory);
+        List<Object[]> listRs = new ArrayList<Object[]>();
+        this.categoryOrder(listRs, list, id, 1);
+        return listRs;
     }
 }
