@@ -241,6 +241,41 @@ public class IndexController {
         }
     }
 
+    @RequestMapping(value = "/update/{token}",method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable String token, HttpSession session) throws ExecutionException {
+        ModelAndView mv = new ModelAndView();
+        if(token==null || token.trim().length() !=32){
+            mv.setViewName("/error");
+            mv.addObject("msg","参数错误,修改失败");
+            return mv;
+        }
+        UserDto userDto = RegisterCache.getKey(token);
+        if(userDto == null){
+            mv.setViewName("/error");
+            mv.addObject("msg","token过期或错误,修改失败");
+            return mv;
+        }
+        //开始修改
+        RegistrationFormVo form = new RegistrationFormVo();
+        form.setId(userDto.getId());
+        form.setUsername(form.getUsername());
+        form.setPassword(userDto.getPassword());
+        form.setEmail(userDto.getEmail());
+        ServerResponse res = userService.updateByFormVo(form);
+        if(res.isSuccess()){
+            session.setAttribute(Const.CURRENT_USER,null);
+            mv.setViewName("/success");
+            userService.activeUser(form.getId());
+            mv.addObject("msg","修改成功,请重新登录");
+            return mv;
+        }else {
+            mv.setViewName("/error");
+            mv.addObject("msg","修改失败");
+            return mv;
+        }
+
+    }
+
 
     @RequestMapping("test")
     public ModelAndView test(){

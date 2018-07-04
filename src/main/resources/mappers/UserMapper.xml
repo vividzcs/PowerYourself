@@ -51,16 +51,17 @@
   <select id="selectUserBySearch" resultType="com.nwuer.core.vo.UserListVo">
     select id,username,email,last_login_datetime,activated
     from user
-    where
+    where 1
     <if test='search_item == "id"' >
-      id LIKE concat(concat('%',#{search_value}),'%')
+      and id LIKE concat(concat('%',#{search_value}),'%')
     </if>
     <if test='search_item == "username"' >
-      username LIKE concat(concat('%',#{search_value}),'%')
+      and username LIKE concat(concat('%',#{search_value}),'%')
     </if>
     <if test='search_item == "email"' >
-      email LIKE concat(concat('%',#{search_value}),'%')
+      and email LIKE concat(concat('%',#{search_value}),'%')
     </if>
+    and role=10
 
   </select>
   <select id="verifyEmailExistence" resultType="java.lang.Integer">
@@ -72,6 +73,18 @@
     select count(1)
     from user
     where username=#{username}
+  </select>
+    <select id="usernameCanUpdate" resultType="java.lang.Integer">
+      SELECT count(1)
+      from user
+      where id!=#{id}
+      and username=#{username}
+    </select>
+  <select id="emailCanUpdate" resultType="java.lang.Integer">
+    SELECT count(1)
+      from user
+      where id!=#{id}
+      and email=#{email}
   </select>
 
 

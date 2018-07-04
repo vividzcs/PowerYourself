@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="" class="navbar-brand"><#if Session.currentUser?exists>${Session.currentUser.username!}</#if> adminx</a>
+            <a href="/" class="navbar-brand">PowerYourself</a>
         </div>
         <!--小屏幕导航按钮和logo-->
         <!--导航-->
@@ -88,7 +88,7 @@
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4>错误页面</h4>
-                <p>${msg!}</p>
+                <h2 style="text-align: center">${msg!}</h2>
                 <p>
                     <button type="button" class="btn btn-default"  data-dismiss="alert"  >确认</button>
                 </p>

@@ -82,7 +82,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String confirmationUrl
                 = Const.URL_PREFIX + "/registrationConfirm/"+user.getId();
 
-        String message = "<h2>点击链接,确认注册</h2><br/><p>如果被阻拦可以复制链接到新窗口打开</p><br/>";
+        String message = "<h2>点击链接,确认注册</h2><br/><p>如果被阻拦可以复制链接到新窗口打开(30分钟后失效)</p><br/>";
 
         /////////////////////////
         MimeMessage mimeMessage = mailSender.createMimeMessage();

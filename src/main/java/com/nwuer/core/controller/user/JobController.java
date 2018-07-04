@@ -161,6 +161,7 @@ public class JobController {
             task.setTitle(jobFormVo.getTitle());
             task.setNotation(jobFormVo.getNotation());
             task.setTaskCategoryId(jobFormVo.getTaskCategoryId());
+            task.setIsFinished(new Byte("0"));
             jobService.updateByPrimaryKeySelective(task);
 
             PowerYourselfJob job = new PowerYourselfJob();
@@ -198,7 +199,7 @@ public class JobController {
     public ServerResponse doneJob(@PathVariable String id,HttpSession session ) throws SchedulerException {
         UserDto userDto = (UserDto) session.getAttribute(Const.CURRENT_USER);
         if(id == null || id.length() != 32) {
-            return ServerResponse.createByErrorMessage("删除失败");
+            return ServerResponse.createByErrorMessage("操作失败");
         }
         ServerResponse res = jobService.doneJob(id);
         if(res.isSuccess()){
@@ -234,8 +235,12 @@ public class JobController {
         UserDto user = (UserDto) session.getAttribute(Const.CURRENT_USER);
         ModelAndView mv = new ModelAndView();
 
+        Date remindTime = DateParseForCronExpressionUtil.getDate(jobFormVo.getRemindTime());
+        Date endTime = DateParseForCronExpressionUtil.getDate(jobFormVo.getEndTime());
+        Date now = new Date();
 
-        if(errors.hasErrors()){
+
+        if(errors.hasErrors() || now.after(remindTime) || now.after(endTime) || remindTime.after(endTime)){
             mv.setViewName("/user/job_post");
 
             List<Object[]> listOrdered = categoryService.getCategoryOrdered(user.getId(),Const.CATEGORY_ROOT_ID);

@@ -35,7 +35,7 @@
             <form action="/user/job/update" class="mar_t15" method="post">
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" id="title" name="title" class="form-control" placeholder="请输入任务标题" value="${job.title}">
+                    <input type="text" id="title" name="title" class="form-control" placeholder="请输入任务标题(请尽量简洁)" value="${job.title}">
                     <input type="hidden" name="id" value="${job.id}"/>
                 </div>
                 <div class="form-group">
@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <label for="content">任务内容</label>
-                    <textarea id="notation" name="notation" class="form-control" rows="10" cols="10" placeholder="请输入任务正文部分">${job.notation}</textarea>
+                    <textarea id="notation" name="notation" class="form-control" rows="10" cols="10" placeholder="请输入任务正文部分,这里的内容将会以邮件的形式提醒您哦">${job.notation}</textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-default pull-right">更新任务</button>

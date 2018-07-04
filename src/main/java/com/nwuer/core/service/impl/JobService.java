@@ -6,6 +6,7 @@ import com.nwuer.core.common.Const;
 import com.nwuer.core.common.ResponseCode;
 import com.nwuer.core.common.ServerResponse;
 import com.nwuer.core.dao.TaskMapper;
+import com.nwuer.core.dto.JobDto;
 import com.nwuer.core.entity.Task;
 import com.nwuer.core.service.IJobService;
 import com.nwuer.core.vo.JobFormVo;
@@ -96,5 +97,18 @@ public class JobService implements IJobService {
     @Transactional
     public void deleteByUserId(String id) {
         taskMapper.deleteByUserId(id);
+    }
+
+    public JobDto selectById(String id){
+        return taskMapper.selectById(id);
+    }
+
+    public boolean canOnlyDelete(String id) {
+        int count = taskMapper.selectByIdAndStatus(id,Const.JOB_NORMAL);
+        if(count>0) {
+            return false;
+        }else {
+            return true;
+        }
     }
 }

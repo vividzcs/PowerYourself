@@ -30,7 +30,7 @@
                     <input type="text" id="email" name="email" class="form-control" placeholder="请输入修改后的用户名" value="${userDto.email!}">
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default pull-right">发布任务</button>
+                    <button type="submit" class="btn btn-default pull-right">确认修改</button>
                 </div>
             </form>
 

@@ -181,4 +181,22 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("修改失败");
         }
     }
+
+    public ServerResponse usernameCanUpdate(String id, String username) {
+        int row = userMapper.usernameCanUpdate(id,username);
+        if(row > 0){
+            return ServerResponse.createByErrorMessage("用户名已被占用");
+        }else {
+            return  ServerResponse.createBySuccess("可以修改");
+        }
+    }
+
+    public ServerResponse emailCanUpdate(String id, String email) {
+        int row = userMapper.emailCanUpdate(id,email);
+        if(row > 0){
+            return ServerResponse.createByErrorMessage("you'xiang邮箱已被占用");
+        }else {
+            return  ServerResponse.createBySuccess("可以修改");
+        }
+    }
 }

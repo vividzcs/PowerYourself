@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="index.html" class="navbar-brand">${Session.currentUser.username!} Admin</a>
+            <a href="PowerYourself" class="navbar-brand">PowerYourself</a>
         </div>
         <!--小屏幕导航按钮和logo-->
         <!--导航-->

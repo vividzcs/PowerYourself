@@ -1,6 +1,5 @@
 package com.nwuer.core.service.impl;
 
-import com.nwuer.core.common.Const;
 import com.nwuer.core.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +17,7 @@ import java.io.UnsupportedEncodingException;
  * @date 2018/6/25 19:25
  */
 @Service
-public class SendSimpleEmailService {
+public class SendEmailForUpdateService {
     /**
      * mailSender注入
      */
@@ -37,7 +36,7 @@ public class SendSimpleEmailService {
     private String brand;
 
     @Autowired
-    public SendSimpleEmailService( JavaMailSender mailSender) {
+    public SendEmailForUpdateService(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
@@ -46,13 +45,13 @@ public class SendSimpleEmailService {
      * 发送邮件
      */
     public void sendEmail(UserDto userDto,String url) throws MessagingException, UnsupportedEncodingException {
-        String token = Const.TOKEN_PREFIX + userDto.getId();
+        String token = userDto.getId();
 
         //构造邮件
-        String subject = "您在" + brand + "重置密码,请继续操作!";
+        String subject = "您在" + brand + "修改了信息,请继续操作!";
         String resetUrl
-                = url + "/reset?token=" + token;
-        String message = "<h2>点击链接,重置您的密码为:"+Const.INITAIL_PASSWORD+"</h2><br/><p>如果被阻拦可以复制链接到新窗口打开(12小时后失效)</p><br/>";
+                = url + "/update/" + token;
+        String message = "<h2>点击链接,修改信息</h2><br/><p>如果被阻拦可以复制链接到新窗口打开(30分钟后失效)</p><br/>";
 
         /////////////////////////
         MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -67,7 +66,7 @@ public class SendSimpleEmailService {
         StringBuilder sb = new StringBuilder(message);
         sb.append("<br/>");
         sb.append(brand);
-        sb.append(":<br/>重置密码: " + resetUrl);
+        sb.append(":<br/>修改信息: " + resetUrl);
         helper.setText(sb.toString(), true);
 
         //发送邮件

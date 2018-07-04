@@ -24,7 +24,9 @@ public enum ResponseCode {
     REGISTRATION_FORM_FILL_IN_INCORRECT(1002, "REGISTRATION_FORM_FILL_IN_INCORRECT"),
     EMAIL_SEND_ERROR(1003, "邮件发送错误"),
     EMAIL_ALREADY_EXISTS(1004, "邮件已经存在"),
-    USERNAME_ALREADY_EXISTS(1005, "用户名已经存在");
+    USERNAME_ALREADY_EXISTS(1005, "用户名已经存在"),
+    IS_PAST_DATE(1006,"日期为过去时间"),
+    JOB_HAS_REMINDED(1007,"任务已经提醒过,设置的时候没有设置重复");
 
     private final Integer code;
     private final String desc;

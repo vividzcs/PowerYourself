@@ -1,4 +1,4 @@
-create table repeat_policy
+/*create table repeat_policy
 (
 	id char(36) not null comment '任务重复策略UUID'
 		primary key,
@@ -32,7 +32,7 @@ create table role
 )
 comment '用户角色'
 ;
-
+*/
 create table user
 (
 	id char(36) default '' not null comment '用户唯一标识符'
@@ -93,6 +93,7 @@ create table task
 	location varchar(2000) null comment '活动地点',
 	notation varchar(5000) null comment '备注',
 	task_category_id char(36) not null comment '任务分类UUID',
+	is_finished tinyint not null default 0 COMMIT '任务状态',
 	CONSTRAINTS task_title UNIQUE (title),
 	constraint task_repeat_policy_id_fk
 		foreign key (repeat_policy_id) references repeat_policy (id)

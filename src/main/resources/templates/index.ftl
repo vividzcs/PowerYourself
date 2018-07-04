@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="" class="navbar-brand">vividzc adminx</a>
+            <a href="/" class="navbar-brand">PowerYourself</a>
         </div>
         <!--小屏幕导航按钮和logo-->
         <!--导航-->
@@ -91,18 +91,23 @@
             <li class="dropdown">
 
                 <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div id="job_item_detail" class="progress" title="Popover title"
+                    <div id="job_item_detail" class="progress" title="${job.title}"
                          data-container="body" data-toggle="popover"
                          data-content='${job.notation?html}'>
 
                         <div class="progress-bar progress-bar-warning" style="width:${job.progress}%"></div>
-                        <span class="content"><time>${(job.endTime?string("yyyy/MM/dd hh:mm"))!}</time>&nbsp;&nbsp;${job.title}</span>
+                        <span class="content"><time>${(job.endTime?string("yyyy/MM/dd hh:mm"))!}</time>&nbsp;&nbsp;<#assign conLen=job.title?length />
+                <#if conLen<10>
+                    ${job.title}
+                <#else >
+                    ${job.title[0..9]}...
+                </#if></span>
 
                     </div>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dLabel">
-                    <li><a href="/delete/${job.id}" onclick="confirmdelete(event,url=this.href)">删除</a></li>
-                    <li><a href="/done/${job.id}"  onclick="confirmdone(event,url=this.href)">完成</a></li>
+                    <li><a href="/user/job/delete/${job.id}" onclick="confirmdelete(event,url=this.href)">删除</a></li>
+                    <li><a href="/user/job/done/${job.id}"  onclick="confirmdone(event,url=this.href)">完成</a></li>
                 </ul>
             </li>
             </#list>
@@ -117,16 +122,11 @@
             <li class="dropdown">
 
                 <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="progress" title="Popover title"
+                    <div class="progress" title="PowerYourself"
                          data-container="body" data-toggle="popover"
                          data-content="你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家">
 
-                        <div class="progress-bar progress-bar-success" style="width:20%"><span class="caret"></span></div>
-                        <div class="progress-bar progress-bar-info progress-bar-striped" style="width:20%"></div>
                         <div class="progress-bar progress-bar-warning" style="width:30%"></div>
-                        <div class="progress-bar progress-bar-danger progress-bar-striped" style="width:15%">
-
-                        </div>
 
                         <span class="content"><time>2018-06-23 08:30</time>&nbsp;&nbsp;你的代办事项管家。你的代办事项管家。你的代办事项管家。</span>
 
@@ -143,16 +143,11 @@
             <li class="dropdown">
 
                 <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="progress" title="Popover title"
+                    <div class="progress" title="PowerYourself"
                          data-container="body" data-toggle="popover"
                          data-content="你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家。你的代办事项管家">
 
-                        <div class="progress-bar progress-bar-success" style="width:20%"><span class="caret"></span></div>
-                        <div class="progress-bar progress-bar-info progress-bar-striped" style="width:20%"></div>
                         <div class="progress-bar progress-bar-warning" style="width:30%"></div>
-                        <div class="progress-bar progress-bar-danger progress-bar-striped" style="width:15%">
-
-                        </div>
 
                         <span class="content"><time>2018-06-23 08:30</time>&nbsp;&nbsp;你的代办事项管家。你的代办事项管家。你的代办事项管家。</span>
 

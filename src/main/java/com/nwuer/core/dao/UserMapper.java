@@ -48,4 +48,8 @@ public interface UserMapper {
     int verifyUsernameExistence(String username);
 
     int updateUserSelective(RegistrationFormVo registrationFormVo);
+
+    int usernameCanUpdate(@Param("id") String id, @Param("username") String username);
+
+    int emailCanUpdate(@Param("id") String id, @Param("email") String email);
 }

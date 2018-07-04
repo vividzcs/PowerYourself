@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="" class="navbar-brand"><#if Session.currentUser?exists>${Session.currentUser.username!}</#if> adminx</a>
+            <a href="/" class="navbar-brand">PowerYourself</a>
         </div>
         <!--小屏幕导航按钮和logo-->
         <!--导航-->

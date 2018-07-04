@@ -5,7 +5,7 @@
         <div class="col-md-2">
             <div class="list-group">
                 <a href="/admin/" class="list-group-item active">人员管理</a>
-                <a href="/admin/to_search" role="button" class="list-group-item" data-toggle="modal" data-target="#myModal">人员搜索</a>
+                <a href="/admin/to_search" class="list-group-item">人员管理</a>
             </div>
         </div>
         <div class="col-md-10">
@@ -38,7 +38,7 @@
                         <td>${user.id}</td>
                         <td>${user.username}</td>
                         <td>${user.email}</td>
-                        <td>${(user.lastLoginDatetime?string("yyyy/MM/dd hh:mm"))!}</td>
+                        <td>${(user.lastLoginDatetime?string("yyyy/MM/dd HH:mm"))!}</td>
                         <td>${user.activated?string("已激活","未激活")}</td>
                         <td>
                             <div role="presentation" class="dropdown">
@@ -89,7 +89,7 @@
 
 <script>
     function confirmdelete(event, url) {
-        if (!confirm("确认要冻结或删除吗")) {
+        if (!confirm("确认要冻结,激活或删除吗")) {
 
         } else {
             $.post(url, function (res) {

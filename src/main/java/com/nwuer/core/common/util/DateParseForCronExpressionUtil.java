@@ -44,4 +44,10 @@ public class DateParseForCronExpressionUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(STANDARD_FORMAT);
         return simpleDateFormat.parse(time);
     }
+
+    public static String getDateString(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(STANDARD_FORMAT);
+        return simpleDateFormat.format(date);
+    }
+
 }

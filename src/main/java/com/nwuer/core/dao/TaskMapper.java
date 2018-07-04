@@ -1,5 +1,6 @@
 package com.nwuer.core.dao;
 
+import com.nwuer.core.dto.JobDto;
 import com.nwuer.core.entity.Task;
 import com.nwuer.core.vo.JobFormVo;
 import com.nwuer.core.vo.JobListVo;
@@ -35,4 +36,8 @@ public interface TaskMapper {
     JobFormVo selectJobForUpdate(@Param("uid") String uid, @Param("id") String id);
 
     void deleteByUserId(String id);
+
+    JobDto selectById(String id);
+
+    int selectByIdAndStatus(@Param("id") String id, @Param("status") Integer status);
 }

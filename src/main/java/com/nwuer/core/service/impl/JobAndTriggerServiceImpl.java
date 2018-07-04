@@ -2,6 +2,8 @@ package com.nwuer.core.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.nwuer.core.common.ResponseCode;
+import com.nwuer.core.common.exception.PowerYourselfException;
 import com.nwuer.core.dao.JobAndTriggerMapper;
 import com.nwuer.core.entity.JobAndTrigger;
 import com.nwuer.core.pojo.BaseJob;
@@ -106,7 +108,9 @@ public class JobAndTriggerServiceImpl implements IJobAndTriggerService {
 
         // 按新的cronExpression表达式重新构建trigger
         trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withDescription(description).withSchedule(scheduleBuilder).build();
-
+        if(trigger == null){
+            throw new PowerYourselfException(ResponseCode.JOB_HAS_REMINDED);
+        }
         // 按新的trigger重新设置job执行
         scheduler.rescheduleJob(triggerKey, trigger);
     }

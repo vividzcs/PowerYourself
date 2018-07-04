@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">${Session.currentUser.username!} admin</a>
+            <a href="/" class="navbar-brand">PowerYourself</a>
         </div>
         <!--小屏幕导航按钮和logo-->
         <!--导航-->
@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ${Session.currentUser.username!"error"}
+                    <#if Session.currentUser?exists>${Session.currentUser.username!}</#if>
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dLabel">

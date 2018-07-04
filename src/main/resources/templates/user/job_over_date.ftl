@@ -48,19 +48,19 @@
         <th scope="row">${job.title}</th>
         <th>
             <#assign conLen=job.title?length />
-            <div class="progress" title="Popover title"
+            <div class="progress" title="${job.title}"
                  data-container="body" data-toggle="popover"
                  data-content="${job.notation?html}">
-                <#if conLen<8>
+                <#if conLen<10>
                 ${job.title}
                 <#else >
-                    ${job.title[0..7]}
+                    ${job.title[0..9]}...
                 </#if>
             </div>
         </th>
-        <td>${(job.beganTime?string("yyyy/MM/dd hh:mm"))!}</td>
-        <td>${(job.remindTime?string("yyyy/MM/dd hh:mm"))!}</td>
-        <td>${(job.endTime?string("yyyy/MM/dd hh:mm"))!}</td>
+        <td>${(job.beganTime?string("yyyy/MM/dd HH:mm"))!}</td>
+        <td>${(job.remindTime?string("yyyy/MM/dd HH:mm"))!}</td>
+        <td>${(job.endTime?string("yyyy/MM/dd HH:mm"))!}</td>
         <td>
             <div role="presentation" class="dropdown">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

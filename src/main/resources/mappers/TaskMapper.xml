@@ -218,4 +218,15 @@
     where id=#{id}
     and user_id=#{uid}
   </select>
+    <select id="selectById" resultType="com.nwuer.core.dto.JobDto">
+      select title,began_time,end_time,remind_time,notation
+      from task
+      where id=#{id}
+    </select>
+    <select id="selectByIdAndStatus" resultType="java.lang.Integer">
+      SELECT count(1)
+      from task
+      where id=#{id}
+      and is_finished=#{status}
+    </select>
 </mapper>

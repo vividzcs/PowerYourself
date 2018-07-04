@@ -3,6 +3,7 @@ package com.nwuer.core.intercepter;
 import com.nwuer.core.common.Const;
 import com.nwuer.core.common.util.TokenCache;
 import com.nwuer.core.dto.UserDto;
+import com.nwuer.core.pojo.Role;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,9 +52,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 
         if(user!=null){
-            if(url.startsWith("/user/") && "10".equals(user.getRole())){
+            if(url.startsWith("/user/") && Role.ORDINARY.getLevel().equals(user.getRole())){
                 return true;
-            }else if(url.startsWith("/admin/") && "1".equals(user.getRole())){
+            }else if(url.startsWith("/admin/") && Role.ADMIN.getLevel().equals(user.getRole())){
                 return true;
             }
 

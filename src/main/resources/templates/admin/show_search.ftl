@@ -38,7 +38,7 @@
                         <td>${user.id}</td>
                         <td>${user.username}</td>
                         <td>${user.email}</td>
-                        <td>${user.lastLoginDatetime!}</td>
+                        <td>${user.lastLoginDatetime?string("yyyy/MM/dd HH:mm")!}</td>
                         <td>${user.activated?string("已激活","未激活")}</td>
                         <td>
                             <div role="presentation" class="dropdown">
@@ -89,7 +89,7 @@
 
 <script>
     function confirmdelete(event, url) {
-        if (!confirm("确认要冻结或删除吗")) {
+        if (!confirm("确认要冻结,激活或删除吗")) {
 
         } else {
             $.post(url, function (res) {
