@@ -1,12 +1,18 @@
 ## 项目概述
 1. 功能
 [![](http://data.nwuer.com/poweryourself_usecase.png)](http://data.nwuer.com/poweryourself_usecase.png)
+
 2. 技术栈
-> 
-springboot
-mybatis
-quartz
+> springboot  
+mybatis  
+quartz  
 freemarker
+
+3. 参与人员
+> 邓正成  前后端代码编写  
+曾小港  文档编写  
+彭东旭  文档编写  
+王翼翡  文档编写  
 
 
 ## PowerYourself工作笔记
